@@ -172,6 +172,7 @@ stalux:
       <script>console.log('自定义footer已加载');</script>
 
   comment:
+    enabled: false # 添加一个开关来启用或禁用评论区，默认关闭
     waline:
       serverURL: https://walines.xingwangzhe.fun
       lang: zh-CN

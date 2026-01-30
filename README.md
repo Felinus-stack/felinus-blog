@@ -6,6 +6,8 @@
 
 # Stalux - 现代 Astro 博客主题
 
+![多端预览](image.png)
+
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/xingwangzhe/stalux)
 
 **本博客主题已有[软著](./软著证明.pdf)，受中国版权相关法律保护，请务必遵守 [LICENSE 许可证](./LICENSE)（MIT 协议）**
@@ -183,20 +185,23 @@ stalux:
     # 更多导航项...
 
   # 评论系统（Waline）
-  waline:
-    serverURL: https://your-waline-server.com
-    # login: 'enable' | 'disable' | 'force'  # 强制登录可防止伪造
-    # recaptchaV3Key: ""  # 可选，配置 reCAPTCHA v3 网站 key
-    # turnstileKey: ""  # 可选，配置 Cloudflare Turnstile key
-    # dark: true  # 是否启用暗色模式适配
-    # reaction: false
-    # meta: ["nick", "mail", "link"]
-    # requiredMeta: []  # 必填字段示例, 可设置为 ['nick'] 或 ['nick','mail']
-    # commentSorting: "latest"  # 评论排序方式
-    # imageUploader: # 自定义图片上传
-    # highlighter: # 自定义代码高亮
-    # texRenderer: # 自定义 TeX 渲染
-    # search: # 自定义搜索功能
+  # 全站评论开关：默认关闭，可通过将 `comment.enabled` 设为 true 启用
+  comment:
+    enabled: false
+    waline:
+      serverURL: https://your-waline-server.com
+      # login: 'enable' | 'disable' | 'force'  # 强制登录可防止伪造
+      # recaptchaV3Key: ""  # 可选，配置 reCAPTCHA v3 网站 key
+      # turnstileKey: ""  # 可选，配置 Cloudflare Turnstile key
+      # dark: true  # 是否启用暗色模式适配
+      # reaction: false
+      # meta: ["nick", "mail", "link"]
+      # requiredMeta: []  # 必填字段示例, 可设置为 ['nick'] 或 ['nick','mail']
+      # commentSorting: "latest"  # 评论排序方式
+      # imageUploader: # 自定义图片上传
+      # highlighter: # 自定义代码高亮
+      # texRenderer: # 自定义 TeX 渲染
+      # search: # 自定义搜索功能
 
   # 友情链接
   links:

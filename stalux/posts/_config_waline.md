@@ -19,6 +19,7 @@ abbrlink: f4442947
 
 ```yaml title="config.yml"
 comment:
+  enabled: false
   waline:
     serverURL: "https://walines.xingwangzhe.fun"
     lang: zh-CN
@@ -45,6 +46,7 @@ comment:
 ## 字段说明
 
 - `serverURL` (必填): Waline 服务端地址，需与部署环境协议一致（HTTPS 站点请使用 https）。
+- `comment.enabled`：全站评论开关，设置为 `true` 才会根据 `comment.waline` 渲染评论区；默认 `false`。
 - `lang`: 界面语言，默认 `zh-CN`，可改为 `en-US` 等。
 - `locale`: 可选，自定义语言配置对象，用于覆盖默认语言包。
 - `login`: 登录模式，可选值 `'enable'`（默认，启用登录）、`'disable'`（禁用登录，用户只能填写信息评论）、`'force'`（强制登录，用户必须注册并登录才可发布评论，可防止伪造）。

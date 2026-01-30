@@ -167,6 +167,7 @@ stalux:
       <script>console.log('自定义footer已加载');</script>
 
   comment:
+    enabled: false
     waline:
       serverURL: "https://walines.xingwangzhe.fun"
       lang: zh-CN
@@ -185,6 +186,7 @@ stalux:
 - 导航与动效: `navs` 为顶部导航，`icon` 使用 Feather Icons 名称；`typetexts` 是首页打字机动效的随机文案。
 - 社交与友链: `mediaLinks` 渲染社交图标；`links` 定义友链分组标题、描述和站点列表。
 - 页脚: `footer.buildtime` 用于站点运行时长；`copyright` 控制版权显示；`theme` 控制主题信息展示；`beian` 提供 ICP/公安备案开关；`badges` 为页脚徽章列表；`custom` 支持自定义插槽 HTML。
+- 评论开关: `comment.enabled` 控制是否在全站渲染评论区（默认 `false`）。
 - 评论: `comment.waline` 配置 Waline.
 
 ## 常见修改
