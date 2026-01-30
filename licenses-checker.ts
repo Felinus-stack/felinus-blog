@@ -57,8 +57,8 @@ async function main() {
 
   const out = outParts.join("\n");
 
-  await writeFile("licenses.txt", out, "utf8");
-  console.log("Wrote licenses.txt — flagged:", flagged.size, "permissive:", permissive.size);
+  await writeFile("license.txt", out, "utf8");
+  console.log("Wrote license.txt — flagged:", flagged.size, "permissive:", permissive.size);
 }
 
 main().catch((err) => {

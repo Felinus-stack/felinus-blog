@@ -11,7 +11,7 @@
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "license-checker": "bun license-checker.ts"
+    "licenses-checker": "bun licenses-checker.ts"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
