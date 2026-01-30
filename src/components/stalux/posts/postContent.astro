@@ -70,8 +70,7 @@ const { title, date, updated, readingTime } = Astro.props;
 
 <script>
     import PhotoSwipeLightbox from "photoswipe/lightbox";
-    import "photoswipe/style.css";
-
+    import PhotoSwipe from "photoswipe";
     // 动态获取图片尺寸并更新 PhotoSwipe 数据属性
     function enrichPhotoSwipeData() {
         const container = document.querySelector("[data-pagefind-body]");
@@ -104,7 +103,7 @@ const { title, date, updated, readingTime } = Astro.props;
         const lightbox = new PhotoSwipeLightbox({
             gallery: "[data-pagefind-body]",
             children: "a[data-pswp]",
-            pswpModule: () => import("photoswipe"),
+            pswpModule: PhotoSwipe,
             initialZoomLevel: "fill",
         });
         lightbox.init();
