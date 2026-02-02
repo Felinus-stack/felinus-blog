@@ -9,7 +9,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypePhotoswipe from "./src/utils/rehype-photoswipe";
 import mermaid from "astro-mermaid";
-
+import { remarkPostBody } from "./src/utils/remark-post-body";
 // import rehypePhotoswipe from "./src/utils/rehype-photoswipe";
 import expressiveCode from "astro-expressive-code";
 
@@ -90,7 +90,7 @@ export default defineConfig({
     },
   },
   markdown: {
-    remarkPlugins: [[remarkToc, { heading: "toc", maxDepth: 7 }], remarkMath],
+    remarkPlugins: [remarkPostBody, [remarkToc, { heading: "toc", maxDepth: 7 }], remarkMath],
     rehypePlugins: [rehypeKatex, rehypePhotoswipe],
     smartypants: true, // 智能标点符号
     gfm: true, // GitHub 风格的 Markdown 支持
