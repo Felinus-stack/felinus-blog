@@ -15,6 +15,8 @@ interface Props {
 }
 
 const { title, date, updated, readingTime } = Astro.props;
+
+// 格式化：若包含时间则显示 YYYY-MM-DD HH:mm:ss，否则退级为 YYYY-MM-DD
 const formatDateTime = (d?: string | Date) => {
     if (!d) return "";
     const dt = dayjs.utc(d);
@@ -80,6 +82,7 @@ const formatDateTime = (d?: string | Date) => {
 <script>
     import PhotoSwipeLightbox from "photoswipe/lightbox";
     import PhotoSwipe from "photoswipe";
+
     // 动态获取图片尺寸并更新 PhotoSwipe 数据属性
     function enrichPhotoSwipeData() {
         const container = document.querySelector("[data-pagefind-body]");
