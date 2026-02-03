@@ -7,28 +7,49 @@ categories:
   - 主题配置
   - 布局定制
 date: 2025-5-10T12:00:00+08:00
-updated: 2026-1-26T12:00:00+08:00
+updated: 2026-2-3T12:00:00+08:00
 abbrlink: 0035a0ee
 ---
 
-## head 自定义
+## head 自定义与分析工具
 
-使用 config.yml 的 `anyhead` 字段可插入额外的 `<head>` 片段（HTML 字符串）。示例：
+使用 config.yml 的 `head` 字段配置网站分析工具（Google Analytics、Bing Clarity、Umami）和自定义头部内容：
 
 ```yaml
-anyhead: |
-  <!-- 统计或验证脚本 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXX');
-  </script>
+head:
+  # Google Analytics 4 跟踪 ID (格式: G-XXXXXXXXXX)
+  googleAnalyticsId: "G-XXXXXXXXXX"
 
-  <!-- 自定义样式 -->
-  <style>:root { --theme-color: #42b883; }</style>
+  # Microsoft Bing Clarity 项目 ID
+  bingClarityId: "your-clarity-id"
+
+  # Umami 分析配置
+  umami:
+    id: "your-umami-website-id" # 网站 ID
+    url: "https://umami.example.com/umami.js" # Umami 脚本 URL
+
+  # 额外自定义头部内容（HTML字符串）
+  anyhead: |
+    <!-- 自定义样式 -->
+    <style>:root { --theme-color: #42b883; }</style>
+    <!-- 其他自定义脚本 -->
 ```
 
-提示：仅插入可信脚本，避免影响隐私与性能；favicon 已由 `favicon` 字段统一控制。
+### 分析工具说明
+
+- **Google Analytics**: 只需填写 `googleAnalyticsId`，主题会自动加载 GA4 脚本
+- **Bing Clarity**: 填写 `bingClarityId`，主题会自动加载 Microsoft Clarity 跟踪代码
+- **Umami**: 需要同时填写 `id`（网站ID）和 `url`（脚本地址）
+
+所有分析脚本都使用 `partytown` 在 Web Worker 中运行，不会影响页面性能。
+
+### 旧版配置迁移
+
+之前使用 `anyhead` 直接插入脚本的用户，建议迁移到新的结构化配置：
+
+- 删除 `anyhead` 中的分析脚本
+- 将对应的跟踪 ID 填入相应的配置字段
+- 保留其他自定义内容在 `anyhead` 中
 
 ## header 导航
 
@@ -66,6 +87,7 @@ navs:
 
 ## 常见操作
 
-- 添加统计/验证：放入 `anyhead`，发布前在浏览器控制台确认无报错。
+- 添加分析工具：在 `head` 下配置对应的跟踪 ID，无需手动编写脚本。
+- 添加自定义头部内容：使用 `head.anyhead` 插入额外的 HTML 片段。
 - 新增导航：在 `navs` 末尾追加项，外链需包含协议（https://）。
 - 更换 favicon：修改 config.yml 中的 `favicon` 路径（支持绝对或站点内路径）。

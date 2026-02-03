@@ -6,7 +6,18 @@ stalux:
   # twitterSite: # Twitter 站点
   # noindex: # 是否禁止搜索引擎索引 默认 false
   # nofollow: # 是否禁止搜索引擎跟踪链接 默认 false
-  anyhead: "" # 额外添加到<head>的内容
+  # 分析工具和自定义头部配置
+  head:
+    # Google Analytics 4 跟踪 ID (格式: G-XXXXXXXXXX)
+    # googleAnalyticsId: ""
+    # Microsoft Bing Clarity 项目 ID
+    # bingClarityId: ""
+    # Umami 分析配置
+    # umami:
+    #   id: ""      # 网站 ID
+    #   url: ""     # Umami 脚本 URL
+    # 额外自定义头部内容（HTML字符串）
+    anyhead: ""
   favicon: "/stalux.ico" # 网站图标路径，默认为根路径下
 
   author:

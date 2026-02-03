@@ -6,7 +6,7 @@ tags:
 categories:
   - 主题配置
 date: 2025-5-10T10:00:00+08:00
-updated: 2026-1-26T00:00:00+08:00
+updated: 2026-2-3T00:00:00+08:00
 abbrlink: 0b563d42
 ---
 
@@ -27,7 +27,18 @@ stalux:
   # twitterSite:
   # noindex:
   # nofollow:
-  anyhead: ""
+  # 分析工具和自定义头部配置
+  head:
+    # Google Analytics 4 跟踪 ID (格式: G-XXXXXXXXXX)
+    # googleAnalyticsId: ""
+    # Microsoft Bing Clarity 项目 ID
+    # bingClarityId: ""
+    # Umami 分析配置
+    # umami:
+    #   id: ""      # 网站 ID
+    #   url: ""     # Umami 脚本 URL
+    # 额外自定义头部内容（HTML字符串）
+    anyhead: ""
   favicon: "/favicon.svg"
 
   author:
@@ -181,7 +192,11 @@ stalux:
 ## 字段说明
 
 - 基础信息: `title`、`url`、`description` 是站点必填；`canonical`/`twitterSite`/`noindex`/`nofollow` 按需开启；`favicon` 支持相对路径。
-- 头部扩展: `anyhead` 用于插入额外 `<head>` 片段（如统计脚本或验证代码）。
+- 头部扩展: `head` 用于配置分析工具（Google Analytics、Bing Clarity、Umami）和自定义 `<head>` 片段。
+  - `head.googleAnalyticsId`: GA4 跟踪 ID
+  - `head.bingClarityId`: Microsoft Clarity 项目 ID
+  - `head.umami`: Umami 分析配置（包含 `id` 和 `url`）
+  - `head.anyhead`: 额外的自定义头部 HTML
 - 作者信息: `author.name`、`author.avatar`、`author.bio` 显示在文章和侧边栏等位置。
 - 导航与动效: `navs` 为顶部导航，`icon` 使用 Feather Icons 名称；`typetexts` 是首页打字机动效的随机文案。
 - 社交与友链: `mediaLinks` 渲染社交图标；`links` 定义友链分组标题、描述和站点列表。
