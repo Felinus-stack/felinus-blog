@@ -31,7 +31,6 @@ BSD-2-CLAUSE css-what
 BSD-2-CLAUSE domelementtype
 BSD-2-CLAUSE domhandler
 BSD-2-CLAUSE domutils
-BSD-2-CLAUSE dotenv
 BSD-2-CLAUSE entities
 BSD-2-CLAUSE http-cache-semantics
 BSD-2-CLAUSE nth-check
@@ -104,7 +103,6 @@ MIT @astrojs/compiler
 MIT @astrojs/internal-helpers
 MIT @astrojs/language-server
 MIT @astrojs/markdown-remark
-MIT @astrojs/partytown
 MIT @astrojs/prism
 MIT @astrojs/rss
 MIT @astrojs/sitemap
@@ -139,7 +137,6 @@ MIT @oslojs/encoding
 MIT @pagefind/default-ui
 MIT @pagefind/linux-x64
 MIT @polka/url
-MIT @qwik.dev/partytown
 MIT @rollup/pluginutils
 MIT @rollup/rollup-linux-x64-gnu
 MIT @rollup/rollup-linux-x64-musl
