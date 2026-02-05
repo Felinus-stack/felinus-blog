@@ -274,4 +274,3 @@ export default defineConfig({
 ```
 
 更多配置选项和高级功能，请参考[Expressive Code官方文档](https://expressive-code.com/)。
-
