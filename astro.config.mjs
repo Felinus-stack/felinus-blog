@@ -5,7 +5,6 @@ import sitemap from "@astrojs/sitemap";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypePhotoswipe from "./src/utils/rehype-photoswipe";
-import mermaid from "astro-mermaid";
 import { remarkPostBody } from "./src/utils/remark-post-body";
 // import rehypePhotoswipe from "./src/utils/rehype-photoswipe";
 import expressiveCode from "astro-expressive-code";
@@ -29,11 +28,10 @@ export default defineConfig({
   experimental: {
     preserveScriptOrder: true,
   },
+  build: {
+    concurrency: 10,
+  },
   integrations: [
-    mermaid({
-      theme: "dark",
-      autoTheme: true,
-    }),
     pagefind(),
     sitemap({
       filter: (page) => {
@@ -82,7 +80,7 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkPostBody, remarkMath],
-    rehypePlugins: [rehypeKatex, rehypePhotoswipe],
+    rehypePlugins: [[rehypeKatex, { strict: false }], rehypePhotoswipe],
     smartypants: true, // 智能标点符号
     gfm: true, // GitHub 风格的 Markdown 支持
   },

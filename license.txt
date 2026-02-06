@@ -223,7 +223,6 @@ MIT arg
 MIT array-iterate
 MIT astro
 MIT astro-expressive-code
-MIT astro-mermaid
 MIT astro-pagefind
 MIT astro-seo
 MIT astro-typewriter
@@ -436,7 +435,6 @@ MIT remark-parse
 MIT remark-rehype
 MIT remark-smartypants
 MIT remark-stringify
-MIT remove-markdown
 MIT request-light
 MIT require-directory
 MIT require-from-string
