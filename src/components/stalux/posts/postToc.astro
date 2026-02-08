@@ -1,4 +1,5 @@
 ---
+import { fade } from "astro:transitions";
 import style from "@styles/components/posts/postToc.module.css";
 
 interface TocHeading {
@@ -22,22 +23,28 @@ const tocItems = headings
     }));
 ---
 
-<h3 class={style.title}>{title}</h3>
-{
-    tocItems.length > 0 ? (
-        <ul class={style.list}>
-            {tocItems.map((heading) => (
-                <li>
-                    <a
-                        class={`${style.item} ${style[`depth-${heading.depth}`] || ""} a-none`}
-                        href={`#${heading.slug}`}
-                    >
-                        {heading.text}
-                    </a>
-                </li>
-            ))}
-        </ul>
-    ) : (
-        <div class={style.empty}>暂无目录</div>
-    )
-}
+<div transition:name="toc-container">
+    <h3 class={style.title}>{title}</h3>
+    {
+        tocItems.length > 0 ? (
+            <ul
+                class={style.list}
+                transition:name="toc-content"
+                transition:animate={fade({ duration: "0.3s" })}
+            >
+                {tocItems.map((heading) => (
+                    <li>
+                        <a
+                            class={`${style.item} ${style[`depth-${heading.depth}`] || ""} a-none`}
+                            href={`#${heading.slug}`}
+                        >
+                            {heading.text}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        ) : (
+            <div class={style.empty}>暂无目录</div>
+        )
+    }
+</div>

@@ -1,4 +1,5 @@
 ---
+import { fade } from "astro:transitions";
 import style from "@styles/components/posts/postCategories.module.css";
 
 interface Props {
@@ -9,11 +10,15 @@ interface Props {
 const { categories = [], title = "分类" } = Astro.props;
 ---
 
-<div class={style.categoriesContainer}>
+<div class={style.categoriesContainer} transition:name="categories-container">
     {categories.length > 0 && <h3 class={style.title}>{title}</h3>}
     {
         categories.length > 0 ? (
-            <div class={style.categoryList}>
+            <div
+                class={style.categoryList}
+                transition:name="categories-content"
+                transition:animate={fade({ duration: "0.3s" })}
+            >
                 {categories.map((category) => (
                     <a
                         href={`/categories/${category}/`}
