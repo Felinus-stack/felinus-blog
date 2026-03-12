@@ -1,9 +1,9 @@
 ---
 title: markdown渲染示例
 tags:
-  - markdown
+    - markdown
 categories:
-  - markdown
+    - markdown
 abbrlink: 2cb4f19c
 date: 2025-5-11T20:00:00+08:00
 updated: 2026-1-26T12:00:00+08:00
@@ -76,7 +76,7 @@ _斜体_ 或 _斜体_
 ```javascript title="这是代码的示例"
 // 代码块
 function example() {
-  return "Hello, world!";
+    return "Hello, world!";
 }
 ```
 
@@ -100,10 +100,10 @@ function example() {
 ### 嵌套列表
 
 1. 第一层
-   - 第二层
-     - 第三层
-       - 第四层
-   - 返回第二层
+    - 第二层
+        - 第三层
+            - 第四层
+    - 返回第二层
 2. 返回第一层
 
 ### 嵌套引用和格式化

@@ -1,11 +1,11 @@
 ---
 title: Markdown文件配置参考
 tags:
-  - 配置
-  - Markdown
-  - 内容创作
+    - 配置
+    - Markdown
+    - 内容创作
 categories:
-  - 主题配置
+    - 主题配置
 date: 2025-5-10T16:00:00+08:00
 updated: 2026-1-26T00:00:00+08:00
 abbrlink: f31dae4f
@@ -42,10 +42,10 @@ abbrlink: astro-guide
 date: 2025-05-10T09:30:00+08:00
 updated: 2025-05-12T18:00:00+08:00
 tags:
-  - Astro
-  - 前端
+    - Astro
+    - 前端
 categories:
-  - 技术教程
+    - 技术教程
 cc: CC-BY-NC-SA-4.0
 draft: false
 ---

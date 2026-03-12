@@ -1,11 +1,11 @@
 ---
 title: 代码显示配置
 tags:
-  - 配置
-  - 代码高亮
-  - 代码框
+    - 配置
+    - 代码高亮
+    - 代码框
 categories:
-  - 主题配置
+    - 主题配置
 date: 2025-5-10T11:30:00+08:00
 updated: 2026-1-26T12:00:00+08:00
 abbrlink: 55a885fa
@@ -152,14 +152,14 @@ function getLongString() {
 ```js wrap
 // 启用自动换行的示例
 function getLongString() {
-  return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
+    return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
 }
 ```
 
 ```js wrap=false
 // 禁用自动换行的示例
 function getLongString() {
-  return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
+    return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间,这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
 }
 ```
 
@@ -174,7 +174,7 @@ function getLongString() {
 ```js wrap preserveIndent
 // 使用preserveIndent的示例（默认启用）
 function getLongString() {
-  return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
+    return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
 }
 ```
 
@@ -190,7 +190,7 @@ function getLongString() {
 ```js wrap preserveIndent=false
 // 使用preserveIndent=false的示例
 function getLongString() {
-  return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
+    return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
 }
 ```
 
@@ -210,10 +210,10 @@ function getLongString() {
 ```js wrap hangingIndent=2
 // 使用hangingIndent=2的示例
 function getLongString() {
-  return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
+    return "这是一个非常长的字符串，如果容器宽度不是特别大，它很可能无法适应可用空间";
 }
 function heavilyIndentedCode() {
-  return "这个长行已经以大量缩进开始，由于hangingIndent=2，其换行部分将再缩进2列";
+    return "这个长行已经以大量缩进开始，由于hangingIndent=2，其换行部分将再缩进2列";
 }
 ```
 
@@ -238,38 +238,38 @@ import { defineConfig } from "astro/config";
 import astroExpressiveCode from "astro-expressive-code";
 
 export default defineConfig({
-  integrations: [
-    astroExpressiveCode({
-      // 配置语法高亮
-      themes: ["dracula", "solarized-light"],
-      shiki: {
-        // 可以在这里传递其他插件选项
-      },
+    integrations: [
+        astroExpressiveCode({
+            // 配置语法高亮
+            themes: ["dracula", "solarized-light"],
+            shiki: {
+                // 可以在这里传递其他插件选项
+            },
 
-      // 配置框架
-      frames: {
-        // 示例：隐藏"复制到剪贴板"按钮
-        showCopyToClipboardButton: false,
-      },
+            // 配置框架
+            frames: {
+                // 示例：隐藏"复制到剪贴板"按钮
+                showCopyToClipboardButton: false,
+            },
 
-      // 配置默认属性
-      defaultProps: {
-        // 默认启用自动换行
-        wrap: true,
-        // 为终端语言禁用换行行缩进
-        overridesByLang: {
-          "bash,ps,sh": { preserveIndent: false },
-        },
-      },
+            // 配置默认属性
+            defaultProps: {
+                // 默认启用自动换行
+                wrap: true,
+                // 为终端语言禁用换行行缩进
+                overridesByLang: {
+                    "bash,ps,sh": { preserveIndent: false },
+                },
+            },
 
-      // 覆盖默认样式
-      styleOverrides: {
-        frames: {
-          shadowColor: "#124",
-        },
-      },
-    }),
-  ],
+            // 覆盖默认样式
+            styleOverrides: {
+                frames: {
+                    shadowColor: "#124",
+                },
+            },
+        }),
+    ],
 });
 ```
 

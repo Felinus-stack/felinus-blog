@@ -1,10 +1,10 @@
 ---
 title: 站点基本信息
 tags:
-  - 配置
-  - 基本配置
+    - 配置
+    - 基本配置
 categories:
-  - 主题配置
+    - 主题配置
 date: 2025-5-10T11:00:00+08:00
 updated: 2026-1-26T12:00:00+08:00
 abbrlink: ad81245d
@@ -91,10 +91,10 @@ abbrlink: sample-post
 date: 2025-05-10T12:00:00+08:00
 updated: 2025-05-12T09:00:00+08:00
 tags:
-  - 技术
-  - 随笔
+    - 技术
+    - 随笔
 categories:
-  - 前端
+    - 前端
 cc: CC-BY-NC-SA-4.0
 draft: false
 ---

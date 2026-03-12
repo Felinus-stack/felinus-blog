@@ -1,10 +1,10 @@
 ---
 title: 页脚配置详解
 tags:
-  - 配置
-  - 页脚
+    - 配置
+    - 页脚
 categories:
-  - 主题配置
+    - 主题配置
 date: 2025-5-10T15:00:00+8:00
 updated: 2026-1-26T12:00:00+8:00
 abbrlink: dd30cf92
@@ -16,81 +16,87 @@ abbrlink: dd30cf92
 
 ```yaml
 footer:
-  buildtime: "2025-05-01T10:00:00"
-  copyright:
-    enabled: true
-    startYear: 2024
-    customText: ""
-  theme:
-    showPoweredBy: true
-    showThemeInfo: true
-  beian:
-    icp:
-      enabled: false
-      number: "辽ICP备XXXXXXXX号"
-    security:
-      enabled: false
-      text: "辽公网安备 XXXXXXXXXXXX号"
-      number: "XXXXXXXXXXXX"
-  badges:
-    - {
-        label: "Powered by",
-        message: "Astro",
-        color: "orange",
-        style: "flat-square",
-        alt: "Powered by Astro",
-        href: "https://astro.build/",
-      }
-    - {
-        label: "Theme",
-        message: "Stalux",
-        color: "blueviolet",
-        alt: "Theme: Stalux",
-        href: "https://github.com/xingwangzhe/stalux",
-      }
-    - {
-        label: "Built with",
-        message: "❤",
-        color: "red",
-        style: "for-the-badge",
-        alt: "Built with Love",
-        href: "https://github.com/xingwangzhe",
-      }
-    - {
-        label: "license",
-        message: "MIT",
-        color: "blue",
-        alt: "License: MIT",
-        href: "https://github.com/xingwangzhe/stalux/blob/main/LICENSE",
-      }
-    - {
-        label: "软著",
-        message: "登记号 2025SR2258474",
-        color: "yellowgreen",
-        alt: "软件著作权登记号 2025SR2258474",
-        href: "/软著证明.pdf",
-      }
-    - {
-        label: "阿里云ESA",
-        message: "支持",
-        color: "brightgreen",
-        alt: "阿里云ESA",
-        href: "https://www.aliyun.com/product/esa",
-      }
-    - {
-        label: "Sitemap",
-        message: "XML",
-        color: "orange",
-        alt: "Sitemap XML",
-        href: "/sitemap-index.xml",
-      }
-    - { label: "RSS", message: "Feed", color: "orange", alt: "RSS Feed", href: "/rss.xml" }
-    - { label: "Atom", message: "Feed", color: "orange", alt: "Atom Feed", href: "/atom.xml" }
-    - { label: "LLMs", message: "Dataset", color: "blue", alt: "LLM Dataset", href: "/llms.txt" }
-  custom: |
-    <!-- footer自定义插槽示例，可放统计、挂件等 -->
-    <div id="custom-footer-hook"></div>
-    <script>console.log('自定义footer已加载');</script>
+    buildtime: "2025-05-01T10:00:00"
+    copyright:
+        enabled: true
+        startYear: 2024
+        customText: ""
+    theme:
+        showPoweredBy: true
+        showThemeInfo: true
+    beian:
+        icp:
+            enabled: false
+            number: "辽ICP备XXXXXXXX号"
+        security:
+            enabled: false
+            text: "辽公网安备 XXXXXXXXXXXX号"
+            number: "XXXXXXXXXXXX"
+    badges:
+        - {
+              label: "Powered by",
+              message: "Astro",
+              color: "orange",
+              style: "flat-square",
+              alt: "Powered by Astro",
+              href: "https://astro.build/",
+          }
+        - {
+              label: "Theme",
+              message: "Stalux",
+              color: "blueviolet",
+              alt: "Theme: Stalux",
+              href: "https://github.com/xingwangzhe/stalux",
+          }
+        - {
+              label: "Built with",
+              message: "❤",
+              color: "red",
+              style: "for-the-badge",
+              alt: "Built with Love",
+              href: "https://github.com/xingwangzhe",
+          }
+        - {
+              label: "license",
+              message: "MIT",
+              color: "blue",
+              alt: "License: MIT",
+              href: "https://github.com/xingwangzhe/stalux/blob/main/LICENSE",
+          }
+        - {
+              label: "软著",
+              message: "登记号 2025SR2258474",
+              color: "yellowgreen",
+              alt: "软件著作权登记号 2025SR2258474",
+              href: "/软著证明.pdf",
+          }
+        - {
+              label: "阿里云ESA",
+              message: "支持",
+              color: "brightgreen",
+              alt: "阿里云ESA",
+              href: "https://www.aliyun.com/product/esa",
+          }
+        - {
+              label: "Sitemap",
+              message: "XML",
+              color: "orange",
+              alt: "Sitemap XML",
+              href: "/sitemap-index.xml",
+          }
+        - { label: "RSS", message: "Feed", color: "orange", alt: "RSS Feed", href: "/rss.xml" }
+        - { label: "Atom", message: "Feed", color: "orange", alt: "Atom Feed", href: "/atom.xml" }
+        - {
+              label: "LLMs",
+              message: "Dataset",
+              color: "blue",
+              alt: "LLM Dataset",
+              href: "/llms.txt",
+          }
+    custom: |
+        <!-- footer自定义插槽示例，可放统计、挂件等 -->
+        <div id="custom-footer-hook"></div>
+        <script>console.log('自定义footer已加载');</script>
 ```
 
 ## 字段说明

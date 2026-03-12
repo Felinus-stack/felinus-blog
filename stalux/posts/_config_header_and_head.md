@@ -1,11 +1,11 @@
 ---
 title: 自定义head与header导航
 tags:
-  - 配置
-  - 自定义
+    - 配置
+    - 自定义
 categories:
-  - 主题配置
-  - 布局定制
+    - 主题配置
+    - 布局定制
 date: 2025-5-10T12:00:00+08:00
 updated: 2026-2-3T12:00:00+08:00
 abbrlink: 0035a0ee
@@ -17,22 +17,22 @@ abbrlink: 0035a0ee
 
 ```yaml
 head:
-  # Google Analytics 4 跟踪 ID (格式: G-XXXXXXXXXX)
-  googleAnalyticsId: "G-XXXXXXXXXX"
+    # Google Analytics 4 跟踪 ID (格式: G-XXXXXXXXXX)
+    googleAnalyticsId: "G-XXXXXXXXXX"
 
-  # Microsoft Bing Clarity 项目 ID
-  bingClarityId: "your-clarity-id"
+    # Microsoft Bing Clarity 项目 ID
+    bingClarityId: "your-clarity-id"
 
-  # Umami 分析配置
-  umami:
-    id: "your-umami-website-id" # 网站 ID
-    url: "https://umami.example.com/umami.js" # Umami 脚本 URL
+    # Umami 分析配置
+    umami:
+        id: "your-umami-website-id" # 网站 ID
+        url: "https://umami.example.com/umami.js" # Umami 脚本 URL
 
-  # 额外自定义头部内容（HTML字符串）
-  anyhead: |
-    <!-- 自定义样式 -->
-    <style>:root { --theme-color: #42b883; }</style>
-    <!-- 其他自定义脚本 -->
+    # 额外自定义头部内容（HTML字符串）
+    anyhead: |
+        <!-- 自定义样式 -->
+        <style>:root { --theme-color: #42b883; }</style>
+        <!-- 其他自定义脚本 -->
 ```
 
 ### 分析工具说明
@@ -57,27 +57,27 @@ head:
 
 ```yaml
 navs:
-  - title: 首页
-    icon: home
-    link: /
-  - title: 文章
-    icon: archive
-    link: /archives
-  - title: 分类
-    icon: folder
-    link: /categories
-  - title: 标签
-    icon: tag
-    link: /tags
-  - title: 友链
-    icon: link
-    link: /links
-  - title: 关于
-    icon: user
-    link: /about
-  - title: 开往
-    icon: airplay
-    link: https://www.travellings.cn/go
+    - title: 首页
+      icon: home
+      link: /
+    - title: 文章
+      icon: archive
+      link: /archives
+    - title: 分类
+      icon: folder
+      link: /categories
+    - title: 标签
+      icon: tag
+      link: /tags
+    - title: 友链
+      icon: link
+      link: /links
+    - title: 关于
+      icon: user
+      link: /about
+    - title: 开往
+      icon: airplay
+      link: https://www.travellings.cn/go
 ```
 
 说明：

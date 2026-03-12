@@ -1,9 +1,9 @@
 ---
 title: 乱数假文
 tags:
-  - 乱数
+    - 乱数
 categories:
-  - 假文
+    - 假文
 date: 2026-01-01T11:11:11+08:00
 updated: 2026-1-26T12:00:00+08:00
 abbrlink: "asddsa"

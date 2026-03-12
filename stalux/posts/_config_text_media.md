@@ -1,10 +1,10 @@
 ---
 title: 打字配置与社交媒体链接
 tags:
-  - 配置
-  - 社交媒体
+    - 配置
+    - 社交媒体
 categories:
-  - 主题配置
+    - 主题配置
 date: 2025-5-10T13:00:00+08:00
 updated: 2026-1-26T00:00:00+08:00
 abbrlink: 8e8c59c4
@@ -20,10 +20,10 @@ abbrlink: 8e8c59c4
 
 ```yaml title="config.yml"
 typetexts:
-  - "Free for free, not free for charge!"
-  - "任意键在哪?"
-  - "F12看看?"
-  - "Hello World!"
+    - "Free for free, not free for charge!"
+    - "任意键在哪?"
+    - "F12看看?"
+    - "Hello World!"
 ```
 
 - 建议每条文案保持简短，便于在首屏完整展示。
@@ -35,20 +35,20 @@ typetexts:
 
 ```yaml title="config.yml"
 mediaLinks:
-  - icon: github
-    link: https://github.com/xingwangzhe/stalux
-  - icon: bilibili
-    link: https://bilibili.com/
-  - icon: X
-    link: https://x.com
-  - icon: juejin
-    link: https://juejin.cn/
-  - icon: zhihu
-    link: https://www.zhihu.com/
-  - icon: maildotru
-    link: mailto:xingwangzhe@outlook.com
-  - icon: telegram
-    link: https://t.me/
+    - icon: github
+      link: https://github.com/xingwangzhe/stalux
+    - icon: bilibili
+      link: https://bilibili.com/
+    - icon: X
+      link: https://x.com
+    - icon: juejin
+      link: https://juejin.cn/
+    - icon: zhihu
+      link: https://www.zhihu.com/
+    - icon: maildotru
+      link: mailto:xingwangzhe@outlook.com
+    - icon: telegram
+      link: https://t.me/
 ```
 
 字段说明：

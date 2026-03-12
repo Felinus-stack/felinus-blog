@@ -1,10 +1,10 @@
 ---
 title: 图片灯箱测试
 tags:
-  - 灯箱
-  - 测试
+    - 灯箱
+    - 测试
 categories:
-  - 主题测试
+    - 主题测试
 date: 2025-12-16T11:00:00+08:00
 updated: 2026-1-26T12:00:00+08:00
 abbrlink: asdasdasd
