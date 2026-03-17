@@ -18,10 +18,9 @@ export default defineConfig({
         rustCompiler: false,
         queuedRendering: {
             enabled: true,
+            poolSize: 1000,
+            contentCache: false,
         },
-    },
-    build: {
-        concurrency: 10,
     },
     integrations: [
         pagefind(),
