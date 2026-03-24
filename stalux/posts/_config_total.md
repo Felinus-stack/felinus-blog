@@ -5,8 +5,8 @@ tags:
     - 入门
 categories:
     - 主题配置
-date: 2025-5-10T10:00:00+08:00
-updated: 2026-2-3T00:00:00+08:00
+date: "2025-05-10 10:00:00"
+updated: "2026-02-03 00:00:00"
 abbrlink: 0b563d42
 ---
 
@@ -40,6 +40,7 @@ stalux:
         # 额外自定义头部内容（HTML字符串）
         anyhead: ""
     favicon: "/favicon.svg"
+    timezone: "Asia/Shanghai" # IANA 时区，用于生成正确的机器可读时间格式
 
     author:
         name: "xingwangzhe"

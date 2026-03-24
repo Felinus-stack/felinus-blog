@@ -5,8 +5,8 @@ tags:
 categories:
     - markdown
 abbrlink: 2cb4f19c
-date: 2025-5-11T20:00:00+08:00
-updated: 2026-1-26T12:00:00+08:00
+date: "2025-05-11 20:00:00"
+updated: "2026-01-26 12:00:00"
 ---
 
 # Markdown 语法全面指南
