@@ -39,8 +39,8 @@ loader: base 为 `stalux/posts/`，pattern `*.md`/`*.mdx`。
 ---
 title: Astro 入门指南
 abbrlink: astro-guide
-date: 2025-05-10T09:30:00+08:00
-updated: 2025-05-12T18:00:00+08:00
+date: "2025-05-10 09:30:00"
+updated: "2025-05-12 18:00:00"
 tags:
     - Astro
     - 前端

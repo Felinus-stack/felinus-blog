@@ -232,8 +232,8 @@ stalux:
   title: Stalux 主题配置总览
   tags: - 配置 - 入门
   categories: - 主题配置
-  date: 2025-5-10T10:00:00+08:00
-  updated: 2025-5-10T16:00:00+08:00
+  date: "2025-05-10 10:00:00"
+  updated: "2025-05-10 16:00:00"
   abbrlink: 0b563d42
 
 ---
