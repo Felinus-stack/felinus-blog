@@ -81,7 +81,7 @@ const sortedYears = Object.keys(archivesByYearMonth)
                                                         class={styles.postDate}
                                                         datetime={post.data.date}
                                                     >
-                                                        {post.data.date}
+                                                        {dayjs.utc(post.data.date).format("YYYY-MM-DD")}
                                                     </time>
                                                     <a
                                                         href={`/posts/${post.data.abbrlink}/`}
