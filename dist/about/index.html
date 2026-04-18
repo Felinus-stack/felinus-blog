@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh-CN"> <head transition:persist-props><meta charset="utf-8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.j56hQv-j.js"></script><title>关于 | 个人博客</title><link rel="canonical" href="https://stalux.needhelp.icu/about/"><meta name="description" content="博客的关于页面,介绍这个博客"><meta name="robots" content="index, follow"><meta property="og:title" content="关于 | 个人博客"><meta property="og:type" content="website"><meta property="og:image" content="/avatar.png"><meta property="og:url" content="https://stalux.needhelp.icu/about/"><meta property="og:description" content="博客的关于页面,介绍这个博客"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="关于 | 个人博客"><meta name="twitter:image" content="/avatar.png"><meta name="twitter:description" content="博客的关于页面,介绍这个博客"><link rel="icon" href="/stalux.ico"><meta name="viewport" content="width=device-width, initial-scale=1"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://stalux.needhelp.icu/about/","name":"关于 | 个人博客","description":"博客的关于页面,介绍这个博客"}</script><script data-astro-rerun type="text/javascript" src="https://events.vercount.one/js"></script><script defer>
+    (function () {
+        // ASCII Art Banner
+        const banner = `
+  ███████╗████████╗ █████╗ ██╗     ██╗   ██╗██╗  ██╗
+  ██╔════╝╚══██╔══╝██╔══██╗██║     ██║   ██║╚██╗██╔╝
+  ███████╗   ██║   ███████║██║     ██║   ██║ ╚███╔╝ 
+  ╚════██║   ██║   ██╔══██║██║     ██║   ██║ ██╔██╗ 
+  ███████║   ██║   ██║  ██║███████╗╚██████╔╝██╔╝ ██╗
+  ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+    `;
+
+        const info = {
+            theme: "Stalux - 现代 Astro 博客主题 [简称:星博客]",
+            version: "V1.1.0",
+            author: "王兴家 (felinus)",
+            repository: "https://github.com/felinus/stalux",
+            copyright: "© 王兴家. All rights reserved.",
+            copyrightRegNumber: "2025SR2258474",
+            license: "软著登字第16914672号",
+            licensePdf: "https://stalux.needhelp.icu/软著证明.pdf",
+            openSourceLicense: "MIT License",
+            licenseUrl:
+                "https://github.com/felinus/stalux/blob/master/LICENSE",
+            registrationDate: "2025年11月24日",
+            website: "https://stalux.needhelp.icu",
+        };
+
+        // 样式定义
+        const styles = {
+            banner: "color: #a855f7; font-weight: bold; font-size: 14px; line-height: 1.2;",
+            title: "color: #fbbf24; font-size: 18px; font-weight: bold; text-shadow: 2px 2px 4px rgba(251, 191, 36, 0.3);",
+            key: "color: #06b6d4; font-weight: bold;",
+            value: "color: #f472b6;",
+            link: "color: #10b981; text-decoration: underline;",
+            copyright: "color: #a78bfa; font-style: italic;",
+            separator: "color: #6366f1; font-weight: bold;",
+        };
+
+        // 打印函数
+        function printBanner() {
+            const separator = "═".repeat(60);
+            const mitLicenseStyle = "color: #34d399; font-weight: bold;";
+            const authStyle = "color: #60a5fa;";
+            const tipStyle = "color: #fbbf24;";
+
+            // 使用一个 console.log 打印所有内容
+            console.log(
+                `%c${banner}` +
+                    `%c\n✨ ${info.theme} ✨\n` +
+                    `%c${separator}\n` +
+                    `%c📦 版本：%c${info.version}\n` +
+                    `%c👤 著作权人：%c${info.author}\n` +
+                    `%c🔗 仓库：%c${info.repository}\n` +
+                    `%c🌐 官网：%c${info.website}\n` +
+                    `%c📜 软著证书：%c${info.license} %c→ ${info.licensePdf}\n` +
+                    `%c🎫 登记号：%c${info.copyrightRegNumber}\n` +
+                    `%c📅 登记日期：%c${info.registrationDate}\n` +
+                    `%c${separator}\n` +
+                    `%c⚖️  开源协议：%c${info.openSourceLicense} %c→ ${info.licenseUrl}\n` +
+                    `%c✅ 授权说明：%c遵守 MIT 协议即获得授权使用\n` +
+                    `%c${separator}\n` +
+                    `%c💡 提示：%c如果你喜欢这个主题，欢迎 Star ⭐\n` +
+                    `%c🐛 问题反馈：%c${info.repository}/issues`,
+                // 所有样式参数
+                styles.banner, // banner
+                styles.title, // 标题
+                styles.separator, // 分隔线1
+                styles.key,
+                styles.value, // 版本
+                styles.key,
+                styles.value, // 著作权人
+                styles.key,
+                styles.link, // 仓库
+                styles.key,
+                styles.link, // 官网
+                styles.key,
+                styles.value,
+                styles.link, // 软著证书
+                styles.key,
+                styles.value, // 登记号
+                styles.key,
+                styles.value, // 登记日期
+                styles.separator, // 分隔线2
+                styles.key,
+                mitLicenseStyle,
+                styles.link, // 开源协议
+                styles.key,
+                authStyle, // 授权说明
+                styles.separator, // 分隔线3
+                styles.key,
+                tipStyle, // 提示
+                styles.key,
+                styles.link, // 问题反馈
+            );
+        }
+
+        // 在页面加载完成后打印
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", printBanner, {
+                once: true,
+            });
+        } else {
+            printBanner();
+        }
+
+        // 视图过渡后也打印（可选，避免过于频繁可以注释掉）
+        // document.addEventListener("astro:page-load", printBanner);
+    })();
+</script><link rel="stylesheet" href="/_astro/WalineComment.swKwODeh.css">
+<link rel="stylesheet" href="/_astro/navs.BUUzqx36.css"><style>[data-astro-transition-scope="astro-65m63l7i-1"] { view-transition-name: post-content; }@layer astro { ::view-transition-old(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-65m63l7i-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-65m63l7i-1"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-65m63l7i-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-65m63l7i-1"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-65m63l7i-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-65m63l7i-1"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-65m63l7i-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-65m63l7i-1"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head><body class="stalux-root dark" data-stalux-bg-layer="a" data-stalux-bg-index="0"> <div class="bg-layer bg-a" style="background-image: url('/_astro/pattern.Bg8-2ETb.png'); opacity: 1;" aria-hidden="true"></div> <div class="bg-layer bg-b" aria-hidden="true"></div> <main class="stalux-main">  <div style="height: 3em;"></div> <nav aria-label="Main navigation" transition:persist-props> <!-- 汉堡菜单按钮 (仅窄屏显示) --> <button data-ref="stalux-nav-toggle" class="_navToggle_wg7ln_46" aria-label="打开导航菜单"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu nav-icon"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg> </button> <!-- 侧边栏遮罩 --> <div data-ref="stalux-nav-overlay" class="_navOverlay_wg7ln_62"></div> <!-- 导航列表 --> <ul data-ref="stalux-nav-list" class="_navList_wg7ln_1"> <li class="_navItem_wg7ln_30"> <a href="/" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home nav-icon"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> <span class="_navText_wg7ln_25">首页</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/archives" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive nav-icon"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg> <span class="_navText_wg7ln_25">文章</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/categories" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder nav-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> <span class="_navText_wg7ln_25">分类</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/tags" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag nav-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> <span class="_navText_wg7ln_25">标签</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/about" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user nav-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span class="_navText_wg7ln_25">关于</span> </a> </li> <li class="_navItem_wg7ln_30"> <a href="javascript:void(0)" class="_navLink_wg7ln_9" data-ref="stalux-search-btn" aria-label="打开搜索"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search nav-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> <span class="_navText_wg7ln_25">搜索</span> </a> </li> </ul> </nav> <div id="search-container" class="search-container"> <div class="search-backdrop"></div> <div class="search-box"> <div class="search-header"> <h2>搜索</h2> <button id="search-close" class="search-close" aria-label="关闭搜索"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> </button> </div> <div class="search-content"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;placeholderText&#34;:&#34;输入关键词搜索...&#34;,&#34;showEmptyResults&#34;:true,&#34;showSubResults&#34;:true,&#34;resetStyles&#34;:true,&#34;translations&#34;:{&#34;placeholder&#34;:&#34;输入关键词搜索...&#34;,&#34;clear_search&#34;:&#34;清除&#34;,&#34;load_more&#34;:&#34;加载更多结果&#34;,&#34;search_label&#34;:&#34;搜索网站&#34;,&#34;filters_label&#34;:&#34;筛选&#34;,&#34;zero_results&#34;:&#34;未找到与 [SEARCH_TERM] 相关的结果&#34;,&#34;many_results&#34;:&#34;找到 [COUNT] 个与 [SEARCH_TERM] 相关的结果&#34;,&#34;one_result&#34;:&#34;找到 1 个与 [SEARCH_TERM] 相关的结果&#34;,&#34;searching&#34;:&#34;搜索 [SEARCH_TERM] 中...&#34;}}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.BBEiE3EH.js"></script> </div> </div> </div> <script type="module">document.addEventListener("astro:page-load",()=>{const n=document.getElementById("search-container"),d=document.getElementById("search-close"),u=document.querySelector(".search-backdrop");document.addEventListener("openSearch",()=>{console.log("Search opened"),n?.classList.add("active");const e=n?.querySelector(".pagefind-ui__search-input");e&&setTimeout(()=>e.focus(),0)});const s=()=>{n?.classList.remove("active")};d?.addEventListener("click",s),u?.addEventListener("click",s),document.addEventListener("keydown",e=>{e.key==="Escape"&&n?.classList.contains("active")&&s()}),n?.addEventListener("click",e=>{const t=e.target;(t.closest(".pagefind-ui__result-link")||t.closest(".pagefind-ui__result-title"))&&setTimeout(()=>s(),100)});function l(){typeof window.pagefind>"u"?window.addEventListener("load",function(){window.pagefind&&o()}):o()}function o(){const e=document.querySelector(".pagefind-ui__search-input");e&&(e.disabled=!1,e.style.pointerEvents="auto",e.addEventListener("focus",function(){this.style.outline="2px solid var(--stalux-accent-color)"}),e.addEventListener("blur",function(){this.style.outline="none"}));const t=document.querySelector(".pagefind-ui__results");t&&new MutationObserver(function(i){i.forEach(function(a){a.type==="childList"&&a.addedNodes.length>0&&t.querySelectorAll(".pagefind-ui__result").forEach(function(f,p){f.style.animationDelay=`${p*.1}s`})})}).observe(t,{childList:!0,subtree:!0})}l();const c=new MutationObserver(function(e){e.forEach(function(t){t.addedNodes.forEach(function(r){if(r.nodeType===Node.ELEMENT_NODE){const i=r;i.classList&&i.classList.contains("pagefind-ui")&&(setTimeout(o,100),c.disconnect())}})})});c.observe(document.body,{childList:!0,subtree:!0}),setTimeout(function(){c.disconnect()},5e3)});</script> <script type="module">document.addEventListener("astro:page-load",()=>{document.querySelector('[data-ref="stalux-search-btn"]')?.addEventListener("click",()=>{const e=new CustomEvent("openSearch");document.dispatchEvent(e)});const o=document.querySelector('[data-ref="stalux-nav-toggle"]'),a=document.querySelector('[data-ref="stalux-nav-list"]'),t=document.querySelector('[data-ref="stalux-nav-overlay"]');function c(){a?.setAttribute("data-state","open"),t?.setAttribute("data-state","show"),document.body.style.overflow="hidden"}function n(){a?.removeAttribute("data-state"),t?.removeAttribute("data-state"),document.body.style.overflow=""}o?.addEventListener("click",c),t?.addEventListener("click",n),document.querySelectorAll('[data-ref="stalux-nav-link"]')?.forEach(e=>{e.addEventListener("click",n)})});</script> <div style="height: 3em;"></div> <div style="max-width: 900px; margin: 2rem auto; padding: 0 1rem;"> <article class="_articleContent_12fr0_3" data-astro-transition-scope="astro-65m63l7i-1"> <!-- Article Header --> <header class="_articleHeader_12fr0_13"> <h1 class="_title_12fr0_20">关于</h1> <div class="_metadata_12fr0_31">   </div> <div class="_pageStats_12fr0_48">   <span id="vercount_container_page_pv">
+👀 阅读量：
+<span id="vercount_value_page_pv">Loading...</span> </span> </div> </header> <!-- Article Body --> <div class="_body_12fr0_89" data-pagefind-body>  <h2 id="关于我">🤗关于我</h2>
+<p>大家好，我是沉浸式代码选手，江湖代号“bug驯服师”——自封满级，实则常被bug反杀。别人的日常是柴米油盐，我的日常是if-else、for循环，还有改不完的需求和紧急上线，主打“代码在手，头发难留”。作为全栈“半吊子”，前端能写花里胡哨的页面，后端能扛简单接口，调试时是逻辑大师，写注释却秒变“失忆选手”，隔天看自己的代码都要疑惑“这是我写的？”。
+我没什么超能力，却能在报错里精准定位问题，能拆分复杂需求，也能笑着应对产品经理“就改一点点”的要求。闲时不打游戏不追剧，要么研究新框架，要么写小脚本偷懒，信奉“能用代码解决，绝不手动操作”。</p>
+<p>我不算社恐，聊天三句不离代码；有点强迫症，代码格式必须整齐。我始终觉得，代码既是谋生工具，也是表达想法的方式。总之，我是爱代码、爱折腾、偶尔犯迷糊、永远不认输的程序猿，期待和大家交流技术、驯服bug，保住珍贵的头发！</p> <div class="_ccBox_1rj8d_3"> <div class="_ccContent_1rj8d_15"> <h2 class="_ccTitle_1rj8d_20">关于</h2> <p class="_ccAuthor_1rj8d_27">作者：felinus</p> <p class="_ccUrl_1rj8d_28">
+本文链接：
+<a href="https://stalux.needhelp.icu/about/" target="_blank" rel="noopener noreferrer"> https://stalux.needhelp.icu/about/ </a> </p> <p class="_ccLicense_1rj8d_29">
+本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 </a> 进行许可。
+</p> </div> <div class="_ccWatermark_1rj8d_57"> <div class="_ccIcon_1rj8d_71"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+    <path fill="#cccccc"
+        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.408 5.89c-.83 0-1.318.64-1.318 1.753v.742c0 1.108.479 1.727 1.318 1.727c.69 0 1.138-.435 1.187-1.05h1.147v.114c-.058 1.147-1.029 1.938-2.343 1.938c-1.612 0-2.518-1.028-2.518-2.729v-.747c0-1.7.914-2.75 2.518-2.75c1.319 0 2.29.812 2.343 1.999v.11H6.595c-.049-.638-.506-1.108-1.187-1.108Zm5.404 0c-.831 0-1.319.64-1.319 1.753v.742c0 1.108.48 1.727 1.319 1.727c.69 0 1.138-.435 1.186-1.05h1.147v.114c-.057 1.147-1.028 1.938-2.342 1.938c-1.613 0-2.518-1.028-2.518-2.729v-.747c0-1.7.914-2.75 2.518-2.75c1.318 0 2.29.812 2.342 1.999v.11h-1.147c-.048-.638-.505-1.108-1.186-1.108Z" />
+</svg></div> </div> </div>  </div> </article>  </div>  </main></body></html>

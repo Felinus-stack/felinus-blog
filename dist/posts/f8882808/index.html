@@ -1,0 +1,948 @@
+<!DOCTYPE html><html lang="zh-CN"> <head transition:persist-props><meta charset="utf-8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.j56hQv-j.js"></script><title>《vue2 生命周期》 | 个人博客</title><link rel="canonical" href="https://stalux.needhelp.icu/posts/f8882808/"><meta name="description" content="Vue2 组件化与生命周期钩子一、Vue2 的组件化1. 什么是Vue2 的组件化？把一个完整的页面，拆分成多个独立、可复用、功能单一的 “小模块（组件）”，每个组件只负责处理自己的视图、逻辑和样式，最后像 “搭积木” 一样，把这些小组件组合起来，形..."><meta name="robots" content="index, follow"><meta property="og:title" content="《vue2 生命周期》 | 个人博客"><meta property="og:type" content="website"><meta property="og:image" content="/avatar.png"><meta property="og:url" content="https://stalux.needhelp.icu/posts/f8882808/"><meta property="og:description" content="Vue2 组件化与生命周期钩子一、Vue2 的组件化1. 什么是Vue2 的组件化？把一个完整的页面，拆分成多个独立、可复用、功能单一的 “小模块（组件）”，每个组件只负责处理自己的视图、逻辑和样式，最后像 “搭积木” 一样，把这些小组件组合起来，形..."><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="《vue2 生命周期》 | 个人博客"><meta name="twitter:image" content="/avatar.png"><meta name="twitter:description" content="Vue2 组件化与生命周期钩子一、Vue2 的组件化1. 什么是Vue2 的组件化？把一个完整的页面，拆分成多个独立、可复用、功能单一的 “小模块（组件）”，每个组件只负责处理自己的视图、逻辑和样式，最后像 “搭积木” 一样，把这些小组件组合起来，形..."><link rel="icon" href="/stalux.ico"><meta name="viewport" content="width=device-width, initial-scale=1"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://stalux.needhelp.icu/posts/f8882808/","name":"《vue2 生命周期》 | 个人博客","description":"Vue2 组件化与生命周期钩子一、Vue2 的组件化1. 什么是Vue2 的组件化？把一个完整的页面，拆分成多个独立、可复用、功能单一的 “小模块（组件）”，每个组件只负责处理自己的视图、逻辑和样式，最后像 “搭积木” 一样，把这些小组件组合起来，形..."}</script><script data-astro-rerun type="text/javascript" src="https://events.vercount.one/js"></script><script defer>
+    (function () {
+        // ASCII Art Banner
+        const banner = `
+  ███████╗████████╗ █████╗ ██╗     ██╗   ██╗██╗  ██╗
+  ██╔════╝╚══██╔══╝██╔══██╗██║     ██║   ██║╚██╗██╔╝
+  ███████╗   ██║   ███████║██║     ██║   ██║ ╚███╔╝ 
+  ╚════██║   ██║   ██╔══██║██║     ██║   ██║ ██╔██╗ 
+  ███████║   ██║   ██║  ██║███████╗╚██████╔╝██╔╝ ██╗
+  ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+    `;
+
+        const info = {
+            theme: "Stalux - 现代 Astro 博客主题 [简称:星博客]",
+            version: "V1.1.0",
+            author: "王兴家 (felinus)",
+            repository: "https://github.com/felinus/stalux",
+            copyright: "© 王兴家. All rights reserved.",
+            copyrightRegNumber: "2025SR2258474",
+            license: "软著登字第16914672号",
+            licensePdf: "https://stalux.needhelp.icu/软著证明.pdf",
+            openSourceLicense: "MIT License",
+            licenseUrl:
+                "https://github.com/felinus/stalux/blob/master/LICENSE",
+            registrationDate: "2025年11月24日",
+            website: "https://stalux.needhelp.icu",
+        };
+
+        // 样式定义
+        const styles = {
+            banner: "color: #a855f7; font-weight: bold; font-size: 14px; line-height: 1.2;",
+            title: "color: #fbbf24; font-size: 18px; font-weight: bold; text-shadow: 2px 2px 4px rgba(251, 191, 36, 0.3);",
+            key: "color: #06b6d4; font-weight: bold;",
+            value: "color: #f472b6;",
+            link: "color: #10b981; text-decoration: underline;",
+            copyright: "color: #a78bfa; font-style: italic;",
+            separator: "color: #6366f1; font-weight: bold;",
+        };
+
+        // 打印函数
+        function printBanner() {
+            const separator = "═".repeat(60);
+            const mitLicenseStyle = "color: #34d399; font-weight: bold;";
+            const authStyle = "color: #60a5fa;";
+            const tipStyle = "color: #fbbf24;";
+
+            // 使用一个 console.log 打印所有内容
+            console.log(
+                `%c${banner}` +
+                    `%c\n✨ ${info.theme} ✨\n` +
+                    `%c${separator}\n` +
+                    `%c📦 版本：%c${info.version}\n` +
+                    `%c👤 著作权人：%c${info.author}\n` +
+                    `%c🔗 仓库：%c${info.repository}\n` +
+                    `%c🌐 官网：%c${info.website}\n` +
+                    `%c📜 软著证书：%c${info.license} %c→ ${info.licensePdf}\n` +
+                    `%c🎫 登记号：%c${info.copyrightRegNumber}\n` +
+                    `%c📅 登记日期：%c${info.registrationDate}\n` +
+                    `%c${separator}\n` +
+                    `%c⚖️  开源协议：%c${info.openSourceLicense} %c→ ${info.licenseUrl}\n` +
+                    `%c✅ 授权说明：%c遵守 MIT 协议即获得授权使用\n` +
+                    `%c${separator}\n` +
+                    `%c💡 提示：%c如果你喜欢这个主题，欢迎 Star ⭐\n` +
+                    `%c🐛 问题反馈：%c${info.repository}/issues`,
+                // 所有样式参数
+                styles.banner, // banner
+                styles.title, // 标题
+                styles.separator, // 分隔线1
+                styles.key,
+                styles.value, // 版本
+                styles.key,
+                styles.value, // 著作权人
+                styles.key,
+                styles.link, // 仓库
+                styles.key,
+                styles.link, // 官网
+                styles.key,
+                styles.value,
+                styles.link, // 软著证书
+                styles.key,
+                styles.value, // 登记号
+                styles.key,
+                styles.value, // 登记日期
+                styles.separator, // 分隔线2
+                styles.key,
+                mitLicenseStyle,
+                styles.link, // 开源协议
+                styles.key,
+                authStyle, // 授权说明
+                styles.separator, // 分隔线3
+                styles.key,
+                tipStyle, // 提示
+                styles.key,
+                styles.link, // 问题反馈
+            );
+        }
+
+        // 在页面加载完成后打印
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", printBanner, {
+                once: true,
+            });
+        } else {
+            printBanner();
+        }
+
+        // 视图过渡后也打印（可选，避免过于频繁可以注释掉）
+        // document.addEventListener("astro:page-load", printBanner);
+    })();
+</script><link rel="stylesheet" href="/_astro/_post_@_@astro.bGkgxjE_.css">
+<link rel="stylesheet" href="/_astro/WalineComment.swKwODeh.css">
+<link rel="stylesheet" href="/_astro/navs.BUUzqx36.css">
+<style>._author_5qng1_1{border:1px solid var(--color-border);flex-direction:column;justify-content:center;margin-top:4em;display:flex}._authorFigure_5qng1_9{justify-content:center;align-items:center;display:flex}._authorFigure_5qng1_9 img{box-shadow:0 0 10px var(--stalux-accent-color);border-radius:50%;transition:transform 1s}._authorFigure_5qng1_9 img:hover{transform:rotate(360deg)}._authorFigure_5qng1_9 figcaption{text-shadow:var(--stalux-text-shadow);color:var(--white-full);margin-left:1em;font-size:2.5em;font-weight:700}._figureColumn_5qng1_33{flex-direction:column}._figureColumn_5qng1_33 figcaption{text-align:center;margin-top:.5em;margin-left:0}@media (max-width:768px){._author_5qng1_1{box-sizing:border-box;border-width:.5px;width:100%;max-width:95vw;margin-top:2em;padding:1em .5em}._authorFigure_5qng1_9{gap:.5em;flex-direction:column!important}._authorFigure_5qng1_9 img{max-width:20vw;max-height:20vw;width:64px!important;height:64px!important}._authorFigure_5qng1_9 figcaption{text-align:center;word-break:break-all;overflow-wrap:break-word;white-space:normal;max-width:90vw;margin-top:.5em;margin-left:0;font-size:1.5em}}#_date-time_dgl25_1{text-shadow:var(--stalux-text-shadow);color:var(--white-full);flex-direction:column;align-items:center;margin-top:2em;display:flex}#_date-time_dgl25_1 #_date_dgl25_1{margin-bottom:.5em;font-size:2em}#_date-time_dgl25_1 #_time_dgl25_1{font-size:3em}
+</style><style>[data-astro-transition-scope="astro-sg4xff5d-1"] { view-transition-name: left-sidebar; }@layer astro { ::view-transition-old(left-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(left-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(left-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(left-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-sg4xff5d-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-sg4xff5d-1"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-sg4xff5d-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-sg4xff5d-1"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-sg4xff5d-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-sg4xff5d-1"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-sg4xff5d-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-sg4xff5d-1"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-65m63l7i-2"] { view-transition-name: post-content; }@layer astro { ::view-transition-old(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(post-content) { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-65m63l7i-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-65m63l7i-2"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-65m63l7i-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-65m63l7i-2"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-65m63l7i-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-65m63l7i-2"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-65m63l7i-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-65m63l7i-2"] { 
+	animation-duration: 1.2s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-xsqpu3ek-3"] { view-transition-name: right-sidebar; }@layer astro { ::view-transition-old(right-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(right-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(right-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(right-sidebar) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xsqpu3ek-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xsqpu3ek-3"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xsqpu3ek-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xsqpu3ek-3"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xsqpu3ek-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xsqpu3ek-3"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xsqpu3ek-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xsqpu3ek-3"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-totingjx-4"] { view-transition-name: toc-container; }@layer astro { ::view-transition-old(toc-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(toc-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(toc-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(toc-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-totingjx-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-totingjx-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-totingjx-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-totingjx-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-totingjx-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-totingjx-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-totingjx-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-totingjx-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-kyqfwumi-5"] { view-transition-name: toc-content; }@layer astro { ::view-transition-old(toc-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(toc-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(toc-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(toc-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-kyqfwumi-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-kyqfwumi-5"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-kyqfwumi-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-kyqfwumi-5"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-kyqfwumi-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-kyqfwumi-5"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-kyqfwumi-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-kyqfwumi-5"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-pmjdhh2p-6"] { view-transition-name: tags-container; }@layer astro { ::view-transition-old(tags-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(tags-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(tags-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(tags-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-pmjdhh2p-6"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-pmjdhh2p-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-pmjdhh2p-6"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-pmjdhh2p-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-pmjdhh2p-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-pmjdhh2p-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-pmjdhh2p-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-pmjdhh2p-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-kfg5vjwi-7"] { view-transition-name: tags-content; }@layer astro { ::view-transition-old(tags-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(tags-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(tags-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(tags-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-kfg5vjwi-7"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-kfg5vjwi-7"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-kfg5vjwi-7"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-kfg5vjwi-7"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-kfg5vjwi-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-kfg5vjwi-7"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-kfg5vjwi-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-kfg5vjwi-7"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-sw3nizyg-8"] { view-transition-name: categories-container; }@layer astro { ::view-transition-old(categories-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(categories-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(categories-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(categories-container) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-sw3nizyg-8"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-sw3nizyg-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-sw3nizyg-8"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-sw3nizyg-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-sw3nizyg-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-sw3nizyg-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-sw3nizyg-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-sw3nizyg-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-rv2deft4-9"] { view-transition-name: categories-content; }@layer astro { ::view-transition-old(categories-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(categories-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(categories-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(categories-content) { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-rv2deft4-9"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-rv2deft4-9"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-rv2deft4-9"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-rv2deft4-9"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-rv2deft4-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-rv2deft4-9"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-rv2deft4-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-rv2deft4-9"] { 
+	animation-duration: 0.3s;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head><body class="stalux-root dark" data-stalux-bg-layer="a" data-stalux-bg-index="0"> <div class="bg-layer bg-a" style="background-image: url('/_astro/pattern.Bg8-2ETb.png'); opacity: 1;" aria-hidden="true"></div> <div class="bg-layer bg-b" aria-hidden="true"></div> <main class="stalux-main">  <div style="height: 3em;"></div> <nav aria-label="Main navigation" transition:persist-props> <!-- 汉堡菜单按钮 (仅窄屏显示) --> <button data-ref="stalux-nav-toggle" class="_navToggle_wg7ln_46" aria-label="打开导航菜单"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu nav-icon"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg> </button> <!-- 侧边栏遮罩 --> <div data-ref="stalux-nav-overlay" class="_navOverlay_wg7ln_62"></div> <!-- 导航列表 --> <ul data-ref="stalux-nav-list" class="_navList_wg7ln_1"> <li class="_navItem_wg7ln_30"> <a href="/" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home nav-icon"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> <span class="_navText_wg7ln_25">首页</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/archives" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive nav-icon"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg> <span class="_navText_wg7ln_25">文章</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/categories" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder nav-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> <span class="_navText_wg7ln_25">分类</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/tags" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag nav-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> <span class="_navText_wg7ln_25">标签</span> </a> </li><li class="_navItem_wg7ln_30"> <a href="/about" class="_navLink_wg7ln_9" data-ref="stalux-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user nav-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span class="_navText_wg7ln_25">关于</span> </a> </li> <li class="_navItem_wg7ln_30"> <a href="javascript:void(0)" class="_navLink_wg7ln_9" data-ref="stalux-search-btn" aria-label="打开搜索"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search nav-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> <span class="_navText_wg7ln_25">搜索</span> </a> </li> </ul> </nav> <div id="search-container" class="search-container"> <div class="search-backdrop"></div> <div class="search-box"> <div class="search-header"> <h2>搜索</h2> <button id="search-close" class="search-close" aria-label="关闭搜索"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> </button> </div> <div class="search-content"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;placeholderText&#34;:&#34;输入关键词搜索...&#34;,&#34;showEmptyResults&#34;:true,&#34;showSubResults&#34;:true,&#34;resetStyles&#34;:true,&#34;translations&#34;:{&#34;placeholder&#34;:&#34;输入关键词搜索...&#34;,&#34;clear_search&#34;:&#34;清除&#34;,&#34;load_more&#34;:&#34;加载更多结果&#34;,&#34;search_label&#34;:&#34;搜索网站&#34;,&#34;filters_label&#34;:&#34;筛选&#34;,&#34;zero_results&#34;:&#34;未找到与 [SEARCH_TERM] 相关的结果&#34;,&#34;many_results&#34;:&#34;找到 [COUNT] 个与 [SEARCH_TERM] 相关的结果&#34;,&#34;one_result&#34;:&#34;找到 1 个与 [SEARCH_TERM] 相关的结果&#34;,&#34;searching&#34;:&#34;搜索 [SEARCH_TERM] 中...&#34;}}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.BBEiE3EH.js"></script> </div> </div> </div> <script type="module">document.addEventListener("astro:page-load",()=>{const n=document.getElementById("search-container"),d=document.getElementById("search-close"),u=document.querySelector(".search-backdrop");document.addEventListener("openSearch",()=>{console.log("Search opened"),n?.classList.add("active");const e=n?.querySelector(".pagefind-ui__search-input");e&&setTimeout(()=>e.focus(),0)});const s=()=>{n?.classList.remove("active")};d?.addEventListener("click",s),u?.addEventListener("click",s),document.addEventListener("keydown",e=>{e.key==="Escape"&&n?.classList.contains("active")&&s()}),n?.addEventListener("click",e=>{const t=e.target;(t.closest(".pagefind-ui__result-link")||t.closest(".pagefind-ui__result-title"))&&setTimeout(()=>s(),100)});function l(){typeof window.pagefind>"u"?window.addEventListener("load",function(){window.pagefind&&o()}):o()}function o(){const e=document.querySelector(".pagefind-ui__search-input");e&&(e.disabled=!1,e.style.pointerEvents="auto",e.addEventListener("focus",function(){this.style.outline="2px solid var(--stalux-accent-color)"}),e.addEventListener("blur",function(){this.style.outline="none"}));const t=document.querySelector(".pagefind-ui__results");t&&new MutationObserver(function(i){i.forEach(function(a){a.type==="childList"&&a.addedNodes.length>0&&t.querySelectorAll(".pagefind-ui__result").forEach(function(f,p){f.style.animationDelay=`${p*.1}s`})})}).observe(t,{childList:!0,subtree:!0})}l();const c=new MutationObserver(function(e){e.forEach(function(t){t.addedNodes.forEach(function(r){if(r.nodeType===Node.ELEMENT_NODE){const i=r;i.classList&&i.classList.contains("pagefind-ui")&&(setTimeout(o,100),c.disconnect())}})})});c.observe(document.body,{childList:!0,subtree:!0}),setTimeout(function(){c.disconnect()},5e3)});</script> <script type="module">document.addEventListener("astro:page-load",()=>{document.querySelector('[data-ref="stalux-search-btn"]')?.addEventListener("click",()=>{const e=new CustomEvent("openSearch");document.dispatchEvent(e)});const o=document.querySelector('[data-ref="stalux-nav-toggle"]'),a=document.querySelector('[data-ref="stalux-nav-list"]'),t=document.querySelector('[data-ref="stalux-nav-overlay"]');function c(){a?.setAttribute("data-state","open"),t?.setAttribute("data-state","show"),document.body.style.overflow="hidden"}function n(){a?.removeAttribute("data-state"),t?.removeAttribute("data-state"),document.body.style.overflow=""}o?.addEventListener("click",c),t?.addEventListener("click",n),document.querySelectorAll('[data-ref="stalux-nav-link"]')?.forEach(e=>{e.addEventListener("click",n)})});</script> <div style="height: 3em;"></div> <div class="_postLayout_1skit_3"> <div class="_container_1skit_10"> <!-- Left Sidebar --> <aside class="_leftSidebar_76xqs_3" data-astro-cid-zubu6tx6 style="--leftSidebar: _leftSidebar_76xqs_3;--sidebarContainer: _sidebarContainer_76xqs_30;" data-astro-transition-scope="astro-sg4xff5d-1"> <div class="_sidebarContainer_1klid_3" style="margin-top: -3em;"> <div class="_authorSection_1klid_9"> <div class="_authorCard_1klid_13"> <article class="_author_5qng1_1" transition:persist-props> <figure class="_authorFigure_5qng1_9 _figureColumn_5qng1_33"> <a href="/" class="a-none"> <img src="/avatar.png" alt="felinus" loading="lazy" decoding="async" width="100" height="100"> </a> <figcaption>felinus</figcaption> </figure>  </article> <p class="_authorBio_1klid_24">博客主题Stalux</p> </div> </div> </div> <div class="_sidebarContainer_76xqs_30" data-astro-cid-zubu6tx6 style="--leftSidebar: _leftSidebar_76xqs_3;--sidebarContainer: _sidebarContainer_76xqs_30;"> <div class="_container_d2ek9_1" transition:persist-props> <div class="_header_d2ek9_7"> <h3 class="_title_d2ek9_16">随机文章</h3> <button id="refresh-random-posts" class="_refreshButton_d2ek9_23" title="刷新随机文章" aria-label="刷新随机文章"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path> </svg> </button> </div> <ul class="_list_d2ek9_64" id="random-posts-list"> <li class="_loading_d2ek9_74">正在加载随机文章...</li> </ul> </div> <script>(function(){const count = 5;
+
+    // 费雪-耶茨洗牌算法
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    // 获取随机文章
+    async function fetchRandomPosts() {
+        try {
+            const response = await fetch("/api/post.abbrlink.json");
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const posts = await response.json();
+            return posts || [];
+        } catch (error) {
+            console.error("Failed to fetch posts:", error);
+            return [];
+        }
+    }
+
+    // 生成随机文章 HTML
+    function generatePostsHTML(posts) {
+        if (posts.length === 0) {
+            return '<li class="no-posts">暂无文章</li>';
+        }
+
+        return posts
+            .map(
+                (post) => `
+            <li class="random-post-item">
+                <a href="/posts/${post.abbrlink}/" class="random-post-link a-none">
+                    ${post.title}
+                </a>
+            </li>
+        `,
+            )
+            .join("");
+    }
+
+    // 刷新随机文章列表
+    async function refreshRandomPosts() {
+        const randomPostsList = document.getElementById("random-posts-list");
+        if (!randomPostsList) return;
+
+        // 添加淡出效果
+        randomPostsList.style.opacity = "0.5";
+
+        setTimeout(async () => {
+            try {
+                const allPosts = await fetchRandomPosts();
+
+                if (allPosts.length === 0) {
+                    randomPostsList.innerHTML =
+                        '<li class="no-posts">暂无文章</li>';
+                    return;
+                }
+
+                // 获取新的随机文章
+                const shuffledPosts = shuffleArray(allPosts);
+                const newRandomPosts = shuffledPosts.slice(0, count);
+
+                // 更新 DOM
+                randomPostsList.innerHTML = generatePostsHTML(newRandomPosts);
+            } catch (error) {
+                console.error("Error refreshing random posts:", error);
+                randomPostsList.innerHTML =
+                    '<li class="error">加载失败，请重试</li>';
+            }
+
+            // 恢复显示
+            randomPostsList.style.opacity = "1";
+        }, 300);
+    }
+
+    // 初始化随机文章列表
+    async function initRandomPosts() {
+        const randomPostsList = document.getElementById("random-posts-list");
+        if (!randomPostsList) return;
+
+        try {
+            const allPosts = await fetchRandomPosts();
+
+            if (allPosts.length === 0) {
+                randomPostsList.innerHTML =
+                    '<li class="no-posts">暂无文章</li>';
+                return;
+            }
+
+            // 获取初始随机文章
+            const shuffledPosts = shuffleArray(allPosts);
+            const initialRandomPosts = shuffledPosts.slice(0, count);
+
+            // 更新 DOM
+            randomPostsList.innerHTML = generatePostsHTML(initialRandomPosts);
+        } catch (error) {
+            console.error("Error initializing random posts:", error);
+            randomPostsList.innerHTML = '<li class="error">加载失败</li>';
+        }
+    }
+
+    // 初始化事件监听
+    document.addEventListener("astro:page-load", () => {
+        const refreshButton = document.getElementById("refresh-random-posts");
+        if (refreshButton) {
+            refreshButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                refreshButton.classList.add("rotating");
+                refreshRandomPosts();
+                setTimeout(() => {
+                    refreshButton.classList.remove("rotating");
+                }, 600);
+            });
+        }
+
+        // 初始化随机文章列表
+        initRandomPosts();
+    });
+})();</script> </div> </aside> <!-- Main Content --> <article class="_articleContent_12fr0_3" data-astro-transition-scope="astro-65m63l7i-2"> <!-- Article Header --> <header class="_articleHeader_12fr0_13"> <h1 class="_title_12fr0_20">《vue2 生命周期》</h1> <div class="_metadata_12fr0_31"> <time class="_metaItem_12fr0_40" datetime="2025-12-26T17:55:44+08:00">
+发布时间：
+ 2025-12-26 17:55:44 </time> <time class="_metaItem_12fr0_40" datetime="2026-04-24T00:00:00+08:00">
+更新时间：
+2026-04-24 00:00:00 </time> </div> <div class="_pageStats_12fr0_48"> <span class="_readingTime_12fr0_66">
+🕒 阅读时间：12 min read </span> <span>
+📝 字数：9004 </span> <span id="vercount_container_page_pv">
+👀 阅读量：
+<span id="vercount_value_page_pv">Loading...</span> </span> </div> </header> <!-- Article Body --> <div class="_body_12fr0_89" data-pagefind-body>   <h1 id="vue2-组件化与生命周期钩子">Vue2 组件化与生命周期钩子</h1>
+<h2 id="一vue2-的组件化">一、Vue2 的组件化</h2>
+<h3 id="1-什么是vue2-的组件化">1. 什么是Vue2 的组件化？</h3>
+<p>把一个完整的页面，拆分成多个独立、可复用、功能单一的 “小模块（组件）”，每个组件只负责处理自己的视图、逻辑和样式，最后像 “搭积木” 一样，把这些小组件组合起来，形成完整的页面。</p>
+<h3 id="2-为什么需要组件化">2. 为什么需要组件化？</h3>
+<p>如果不做组件化，整个页面的代码会全部写在一个.vue文件里，会出现代码臃肿、逻辑混乱、无法复用等问题。组件化的核心价值体现在：</p>
+<ul>
+<li>
+<p>复用性</p>
+</li>
+<li>
+<p>可维护性</p>
+</li>
+<li>
+<p>分工协作</p>
+</li>
+<li>
+<p>降低复杂度</p>
+</li>
+</ul>
+<p>每个组件从 “被创建” 到 “渲染到页面”，再到 “数据更新重新渲染”，最后 “被销毁”（比如页面跳转），是一个完整的生命周期过程。我们需要在这个过程的关键节点执行自定义逻辑。</p>
+<p>Vue2 的生命周期，是组件从 “创建—>挂载—> 更新—> 销毁”的完整时间轴，每个阶段Vue 会自动触发对应的钩子函数。</p>
+<h4 id="生命周期流程图">生命周期流程图</h4>
+<p><a href="https://www.cnblogs.com/qingheshiguang/p/14677198.html">https://www.cnblogs.com/qingheshiguang/p/14677198.html</a></p>
+<h2 id="二示例代码">二、示例代码</h2>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.uaqyr.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame" style="--lnWidth:3ch"><figcaption class="header"></figcaption><pre data-language="html" class="wrap" style="--ecMaxLine:70ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;!</span><span style="--0:#85E89D">DOCTYPE</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">html</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">html</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">lang</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"en"</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">head</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">meta</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">charset</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"UTF-8"</span><span style="--0:#E1E4E8"> /></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">title</span><span style="--0:#E1E4E8">>Vue-LifeClyle&#x3C;/</span><span style="--0:#85E89D">title</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">head</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">style</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">    </span><span style="--0:#B392F0">.jing</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">      </span><span style="--0:#79B8FF">font-size</span><span style="--0:#E1E4E8">: </span><span style="--0:#79B8FF">50</span><span style="--0:#F97583">px</span><span style="--0:#E1E4E8">;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">      </span><span style="--0:#79B8FF">font-weight</span><span style="--0:#E1E4E8">: </span><span style="--0:#79B8FF">bolder</span><span style="--0:#E1E4E8">;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">style</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">body</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">div</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">id</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"app"</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">class</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"jing"</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">p</span><span style="--0:#E1E4E8">>{{message}}&#x3C;/</span><span style="--0:#85E89D">p</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">31</div></div><div class="code"><span class="indent">      </span><span style="--0:#99A0A6">&#x3C;!-- Vue 内置组件，缓存组件实例，避免重复创建和销毁 --></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">32</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">33</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">keep-alive</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">34</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">35</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">jh-component</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">msg</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"2026年1月1日"</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">v-if</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"show"</span><span style="--0:#E1E4E8">>&#x3C;/</span><span style="--0:#85E89D">jh-component</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">36</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">37</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">keep-alive</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">38</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">39</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">div</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">40</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">41</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">body</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">42</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">43</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">src</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span><span style="--0:#E1E4E8">>&#x3C;/</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">44</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">45</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">46</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">47</div></div><div class="code"><span class="indent">    </span><span style="--0:#99A0A6">// 局部组件</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">48</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">49</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">haohao</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">50</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">51</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">template: </span><span style="--0:#9ECBFF">"&#x3C;div>from haohao: {{msg}}&#x3C;/div>"</span><span style="--0:#E1E4E8">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">52</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">53</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">props: [</span><span style="--0:#9ECBFF">"msg"</span><span style="--0:#E1E4E8">],</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">54</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">55</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">deactivated</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">56</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">57</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"component deactivated!"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">58</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">59</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">60</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">61</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">activated</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">62</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">63</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"component activated"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">64</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">65</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">66</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">67</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">68</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">69</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">app</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">new</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">Vue</span><span style="--0:#E1E4E8">({</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">70</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">71</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#9ECBFF">"#app"</span><span style="--0:#E1E4E8">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">72</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">73</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">data</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">74</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">75</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">return</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">76</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">77</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#9ECBFF">"jingjing"</span><span style="--0:#E1E4E8">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">78</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">79</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">show: </span><span style="--0:#79B8FF">true</span><span style="--0:#E1E4E8">, </span><span style="--0:#99A0A6">//控制子组件是否显示</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">80</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">81</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">82</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">83</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">84</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">85</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">beforeCreate</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">86</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">87</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"beforeCreate Vue实例创建前的状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">88</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">89</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">90</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">91</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">92</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">93</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">94</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">95</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">96</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">97</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">98</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">99</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">100</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">101</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">102</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">103</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">104</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">105</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">created</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">106</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">107</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"created Vue实例创建完毕后状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">108</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">109</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">110</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">111</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">112</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">113</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">114</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">115</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">116</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">117</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">118</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">119</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">120</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">121</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">122</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">123</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">124</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">125</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">beforeMount</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">126</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">127</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"beforeMount 挂载前状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">128</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">129</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">130</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">131</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">132</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">133</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">134</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">135</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">136</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">137</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">138</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">139</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">140</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">141</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">142</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">143</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">144</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">145</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">146</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">147</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">mounted</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">148</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">149</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"mounted 挂载后状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">150</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">151</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">152</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">153</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">154</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">155</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">156</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">157</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">158</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">159</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">160</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">161</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">162</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">163</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">164</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">165</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">166</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">167</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">168</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">169</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">beforeUpdate</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">170</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">171</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"beforeUpdate 更新前状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">172</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">173</div></div><div class="code"><span class="indent"> </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">174</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">175</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">176</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">177</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">178</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">179</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">180</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">181</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">182</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">183</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">184</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">185</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">186</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">187</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">188</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">189</div></div><div class="code"><span class="indent">          </span><span style="--0:#9ECBFF">"beforeUpdate = "</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">+</span><span style="--0:#E1E4E8"> document.</span><span style="--0:#B392F0">querySelector</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"p"</span><span style="--0:#E1E4E8">).innerHTML</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">190</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">191</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">192</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">193</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">194</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">195</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">196</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">197</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">updated</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">198</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">199</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"updated 更新完成状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">200</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">201</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">202</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">203</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">204</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">205</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">206</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">207</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">208</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">209</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">210</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">211</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">212</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">213</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">214</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">215</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">216</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">217</div></div><div class="code"><span class="indent">          </span><span style="--0:#9ECBFF">"beforeUpdate = "</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">+</span><span style="--0:#E1E4E8"> document.</span><span style="--0:#B392F0">querySelector</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"p"</span><span style="--0:#E1E4E8">).innerHTML</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">218</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">219</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">220</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">221</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">222</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">223</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">224</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">225</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">beforeDestroy</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">226</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">227</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"beforeDestroy 销毁前状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">228</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">229</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">230</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">231</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">232</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">233</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8"> </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">234</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">235</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">236</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">237</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">238</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">239</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">240</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">241</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">242</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">243</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">244</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">245</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">246</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">247</div></div><div class="code"><span class="indent">      </span><span style="--0:#B392F0">destroyed</span><span style="--0:#E1E4E8">: </span><span style="--0:#F97583">function</span><span style="--0:#E1E4E8"> () {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">248</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">249</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">group</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"destroyed 销毁完成状态————————————————————"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">250</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">251</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">state</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">252</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">253</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">el: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">254</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">255</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">data: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$data,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">256</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">257</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">          </span></span><span style="--0:#E1E4E8">message: </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.message,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">258</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">259</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">};</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">260</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">261</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(</span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.$el);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">262</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">263</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">log</span><span style="--0:#E1E4E8">(state);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">264</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">265</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">        </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">groupEnd</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">266</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">267</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">268</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">269</div></div><div class="code"><span class="indent">      </span><span style="--0:#99A0A6">//注册局部组件</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">270</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">271</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">components: {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">272</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">273</div></div><div class="code"><span class="indent">        </span><span style="--0:#9ECBFF">"jh-component"</span><span style="--0:#E1E4E8">: haohao,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">274</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">275</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">276</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">277</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">});</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">278</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">279</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">280</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">281</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">html</span><span style="--0:#E1E4E8">></span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<!DOCTYPE html><html lang=&#x22;en&#x22;>  <head><meta charset=&#x22;UTF-8&#x22; />    <title>Vue-LifeClyle</title>  </head>  <style>    .jing {      font-size: 50px;      font-weight: bolder;    }  </style>  <body>    <div id=&#x22;app&#x22; class=&#x22;jing&#x22;>      <p>{{message}}</p>      <!-- Vue 内置组件，缓存组件实例，避免重复创建和销毁 -->      <keep-alive>        <jh-component msg=&#x22;2026年1月1日&#x22; v-if=&#x22;show&#x22;></jh-component> </keep-alive>    </div>  </body>  <script src=&#x22;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&#x22;></script><script>    // 局部组件    const haohao = {      template: &#x22;<div>from haohao: {{msg}}</div>&#x22;,      props: [&#x22;msg&#x22;],      deactivated () {        console.log(&#x22;component deactivated!&#x22;); },      activated () { console.log(&#x22;component activated&#x22;);      },    };    const app = new Vue({      el: &#x22;#app&#x22;,      data: function () {        return {          message: &#x22;jingjing&#x22;,          show: true, //控制子组件是否显示        };      },      beforeCreate: function () {        console.group(&#x22;beforeCreate Vue实例创建前的状态————————————————————&#x22;);        const state = {          el: this.$el,          data: this.$data,          message: this.message, };        console.log(state); console.groupEnd();      },      created: function () {        console.group(&#x22;created Vue实例创建完毕后状态————————————————————&#x22;);        const state = {          el: this.$el,          data: this.$data,          message: this.message,        };        console.log(state);        console.groupEnd();      },      beforeMount: function () {        console.group(&#x22;beforeMount 挂载前状态————————————————————&#x22;);        const state = {          el: this.$el,          data: this.$data,          message: this.message,        };        console.log(this.$el);        console.log(state);        console.groupEnd();      },      mounted: function () {        console.group(&#x22;mounted 挂载后状态————————————————————&#x22;);        const state = {          el: this.$el,          data: this.$data, message: this.message,        };        console.log(this.$el);        console.log(state);        console.groupEnd();      },      beforeUpdate: function () {        console.group(&#x22;beforeUpdate 更新前状态————————————————————&#x22;); const state = {          el: this.$el,          data: this.$data,          message: this.message,        };        console.log(this.$el);        console.log(state);        console.log(          &#x22;beforeUpdate = &#x22; + document.querySelector(&#x22;p&#x22;).innerHTML        );        console.groupEnd();      },      updated: function () {        console.group(&#x22;updated 更新完成状态————————————————————&#x22;);        const state = {          el: this.$el,          data: this.$data,          message: this.message,        };        console.log(this.$el);        console.log(state);        console.log(          &#x22;beforeUpdate = &#x22; + document.querySelector(&#x22;p&#x22;).innerHTML        );        console.groupEnd();      },      beforeDestroy: function () {        console.group(&#x22;beforeDestroy 销毁前状态————————————————————&#x22;);        const state = {          el: this.$el, data: this.$data,          message: this.message,        };        console.log(this.$el);        console.log(state);        console.groupEnd();      },      destroyed: function () {        console.group(&#x22;destroyed 销毁完成状态————————————————————&#x22;);        const state = {          el: this.$el,          data: this.$data,          message: this.message,        };        console.log(this.$el);        console.log(state);        console.groupEnd();      },      //注册局部组件      components: {        &#x22;jh-component&#x22;: haohao,      },    });  </script></html>"><div></div></button></div></figure></div>
+<h2 id="三代码的结构">三、代码的结构</h2>
+<p>创建一个app 的Vue 根实例，将其挂载在id为 app 的Dom 元素上。局部注册一个组件名为 haohao 并在根实例中将其注册，使其可以在根实例的作用域上进行使用。</p>
+<h2 id="四打开开发者工具开始进行测试">四、打开开发者工具开始进行测试</h2>
+<h3 id="1-beforecreate-和-created">1. beforeCreate 和 created</h3>
+<p><a href="/img1.png" data-pswp="true" aria-label="图片1"><img src="/img1.png" alt="图片1"></a></p>
+<ul>
+<li>
+<p>beforeCreate：data 和 el 均未初始化，值为 undefined</p>
+</li>
+<li>
+<p>created ：Vue 实例观测的对象data已经配置好了，可以得到 app.message 中的值，但Vue实例使用的根Dom 元素还没有初始化。</p>
+</li>
+</ul>
+<h4 id="使用场景">使用场景：</h4>
+<p>初始化数据请求，调用后端接口获取页面初始化数据，无需等待 DOM；</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="javascript" class="wrap" style="--ecMaxLine:53ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#B392F0">created</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.</span><span style="--0:#B392F0">fetchGoodsList</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#B392F0">methods</span><span style="--0:#E1E4E8">: {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">async </span><span style="--0:#B392F0">fetchGoodsList</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583">try</span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">      </span><span style="--0:#F97583">const</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">res</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> </span><span style="--0:#F97583">await</span><span style="--0:#E1E4E8"> axios.</span><span style="--0:#B392F0">get</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"/api/goods/list"</span><span style="--0:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">      </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.goodsList </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> res.data.list;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">} </span><span style="--0:#F97583">catch</span><span style="--0:#E1E4E8"> (err) {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">      </span></span><span style="--0:#E1E4E8">console.</span><span style="--0:#B392F0">error</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">"请求商品列表失败："</span><span style="--0:#E1E4E8">, err);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span style="--0:#E1E4E8">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="created() {  this.fetchGoodsList();},methods: {  async fetchGoodsList() {    try {      const res = await axios.get(&#x22;/api/goods/list&#x22;);      this.goodsList = res.data.list;    } catch (err) {      console.error(&#x22;请求商品列表失败：&#x22;, err);    }  }}"><div></div></button></div></figure></div>
+<p>初始化数据，绑定不依赖DOM的自定义事件。</p>
+<h3 id="2-beforemount-和-mounted">2. beforeMount 和 mounted</h3>
+<h4 id="打印结果说明">打印结果说明：</h4>
+<p><a href="/img2.png" data-pswp="true" aria-label="图片2"><img src="/img2.png" alt="图片2"></a></p>
+<ul>
+<li>
+<p>beforeMount 执行时：data 和 el 均已经初始化，但是从 {{message }}的展示情况看并没有渲染数据，说明DOM仅完成占位，需等到mounted 挂载阶段再渲染具体值。</p>
+</li>
+<li>
+<p>mounted执行时：此时 el 已经成功进行渲染并且挂载在实例上面。</p>
+</li>
+</ul>
+<p>并且可以在控制台观察到 <code>component activated</code> 被打印出来，说明子组件 jh-component 被 <keep-alive> 包裹，随着 el 的挂载而触发。子组件的显示是在父组件 mounted 之前完成的。</keep-alive></p>
+<h4 id="类比说明">类比说明：</h4>
+<p>父组件就像 “房子”，子组件是 “家具”，父组件会先搭好房子框架（beforeMount），然后把家具摆进去（子组件渲染显示），最后才宣布 “房子装修完成”（mounted)。</p>
+<h4 id="测试操作">测试操作：</h4>
+<p>在控制台输入 <code>app.show = false</code>，修改data中的值后，会触发 beforeUpdate 和 updated 钩子函数，同时 deactivated 钩子会触发，表示子组件已停用、进入缓存状态，子组件会消失。</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="html" class="wrap" style="--ecMaxLine:60ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">keep-alive</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:3ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">   </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">jh-component</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">msg</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"2026年1月1日"</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">v-if</span><span style="--0:#E1E4E8">=</span><span style="--0:#9ECBFF">"show"</span><span style="--0:#E1E4E8">>&#x3C;/</span><span style="--0:#85E89D">jh-component</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">keep-alive</span><span style="--0:#E1E4E8">></span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<keep-alive>   <jh-component msg=&#x22;2026年1月1日&#x22; v-if=&#x22;show&#x22;></jh-component></keep-alive>"><div></div></button></div></figure></div>
+<h4 id="mounted使用场景">mounted使用场景：</h4>
+<p>在控制台输入 <code>app.message = 'jingjing'</code>，验证以下场景：</p>
+<p><a href="/img3.png" data-pswp="true" aria-label="图片3"><img src="/img3.png" alt="图片3"></a></p>
+<ul>
+<li>
+<p>操作 DOM（如初始化 echarts、swiper、地图等第三方插件）；</p>
+</li>
+<li>
+<p>获取 DOM 尺寸 / 位置（如计算元素高度、滚动位置）；</p>
+</li>
+<li>
+<p>绑定依赖 DOM 的事件监听（如自定义滚动事件）。</p>
+</li>
+</ul>
+<p><a href="/img4.png" data-pswp="true" aria-label="图片4"><img src="/img4.png" alt="图片4"></a></p>
+<h4 id="验证结果">验证结果：</h4>
+<p>beforeUpdate 和 updated 触发时，el 中的数据都已经渲染完毕，但根据控制台的打印信息 <code>beforeUpdate = jingjing</code> 而 <code>updated = haohao</code> 可知，只有当 updated 钩子被调用时，组件DOM才会被更新。</p>
+<h3 id="3-beforedestroy-和-destroyed">3. beforeDestroy 和 destroyed</h3>
+<h4 id="测试操作-1">测试操作：</h4>
+<p>直接在控制台输入 <code>app.$destroy()</code> 即可将Vue实例销毁，父实例主动销毁后，子组件才会随之销毁。</p>
+<h4 id="打印结果说明-1">打印结果说明：</h4>
+<p>销毁前和销毁后的DOM实例没有明显变化，其核心变化体现在响应式关联的解除：</p>
+<ul>
+<li>
+<p>实例销毁后，根组件的响应式系统、子组件、DOM关联的所有元素均被解绑；</p>
+</li>
+<li>
+<p>组件销毁的核心是解除响应式系统的关联，销毁子组件、终止所有生命周期，但根实例的DOM节点不会被主动删除；</p>
+</li>
+<li>
+<p>实例销毁后，Vue实例关联的所有内容均已解绑，操作实例不会有任何响应。</p>
+</li>
+</ul>
+<h4 id="beforedestroy使用场景">beforeDestroy使用场景：</h4>
+<h5 id="场景1清理定时器">场景1：清理定时器</h5>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="javascript" class="wrap" style="--ecMaxLine:36ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">template</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">div</span><span style="--0:#E1E4E8">>当前计数：{{ count }}&#x3C;/</span><span style="--0:#85E89D">div</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">template</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span style="--0:#E1E4E8">export default {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">data</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">return { </span><span style="--0:#B392F0">count</span><span style="--0:#E1E4E8">: </span><span style="--0:#79B8FF">0</span><span style="--0:#E1E4E8">, </span><span style="--0:#B392F0">timer</span><span style="--0:#E1E4E8">: </span><span style="--0:#79B8FF">null</span><span style="--0:#E1E4E8"> }</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">created</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">this.timer </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">setInterval</span><span style="--0:#E1E4E8">(() </span><span style="--0:#F97583">=></span><span style="--0:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">      </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.count</span><span style="--0:#F97583">++</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">}, </span><span style="--0:#79B8FF">1000</span><span style="--0:#E1E4E8">)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">beforeDestroy</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span class="indent">    </span><span style="--0:#B392F0">clearInterval</span><span style="--0:#E1E4E8">(this.timer)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">31</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">32</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">33</div></div><div class="code"><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">34</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">35</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<template>  <div>当前计数：{{ count }}</div></template><script>export default {  data() {    return { count: 0, timer: null }  },  created() {    this.timer = setInterval(() => {      this.count++    }, 1000)  },  beforeDestroy() {    clearInterval(this.timer)  }}</script>"><div></div></button></div></figure></div>
+<h5 id="场景2解绑全局自定义事件">场景2：解绑全局自定义事件</h5>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="javascript" class="wrap" style="--ecMaxLine:60ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#E1E4E8">export default {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">mounted</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">window.addEventListener(</span><span style="--0:#9ECBFF">'resize'</span><span style="--0:#E1E4E8">, this.handleResize);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">this.$bus.$on(</span><span style="--0:#9ECBFF">'refresh-data'</span><span style="--0:#E1E4E8">, this.refresh);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">methods: {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">    </span><span style="--0:#B392F0">handleResize</span><span style="--0:#E1E4E8">() { </span><span style="--0:#99A0A6">/* 窗口缩放逻辑 */</span><span style="--0:#E1E4E8"> },</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">    </span><span style="--0:#B392F0">refresh</span><span style="--0:#E1E4E8">() { </span><span style="--0:#99A0A6">/* 数据刷新逻辑 */</span><span style="--0:#E1E4E8"> }</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">beforeDestroy</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">window.removeEventListener(</span><span style="--0:#9ECBFF">'resize'</span><span style="--0:#E1E4E8">, this.handleResize);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">this.$bus.$off(</span><span style="--0:#9ECBFF">'refresh-data'</span><span style="--0:#E1E4E8">, this.refresh);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">31</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<script>export default {  mounted() {    window.addEventListener(&#x27;resize&#x27;, this.handleResize);    this.$bus.$on(&#x27;refresh-data&#x27;, this.refresh);  },  methods: {    handleResize() { /* 窗口缩放逻辑 */ },    refresh() { /* 数据刷新逻辑 */ }  },  beforeDestroy() {    window.removeEventListener(&#x27;resize&#x27;, this.handleResize);    this.$bus.$off(&#x27;refresh-data&#x27;, this.refresh);  }}</script>"><div></div></button></div></figure></div>
+<h5 id="场景3销毁第三方库实例">场景3：销毁第三方库实例</h5>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="javascript" class="wrap" style="--ecMaxLine:69ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">template</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">div</span><span style="--0:#E1E4E8"> </span><span style="--0:#B392F0">id</span><span style="--0:#F97583">=</span><span style="--0:#9ECBFF">"echart-box"</span><span style="--0:#E1E4E8">>&#x3C;/</span><span style="--0:#85E89D">div</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">template</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span style="--0:#E1E4E8">import * as echarts from 'echarts';</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span style="--0:#E1E4E8">export default {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">data</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">return { </span><span style="--0:#B392F0">chart</span><span style="--0:#E1E4E8">: </span><span style="--0:#79B8FF">null</span><span style="--0:#E1E4E8"> };</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">mounted</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">    </span><span style="--0:#99A0A6">// 初始化Echarts实例</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">this.chart </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> echarts.</span><span style="--0:#B392F0">init</span><span style="--0:#E1E4E8">(document.</span><span style="--0:#B392F0">getElementById</span><span style="--0:#E1E4E8">(</span><span style="--0:#9ECBFF">'echart-box'</span><span style="--0:#E1E4E8">));</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">this.chart.setOption({ </span><span style="--0:#B392F0">title</span><span style="--0:#E1E4E8">: { </span><span style="--0:#B392F0">text</span><span style="--0:#E1E4E8">: </span><span style="--0:#9ECBFF">'测试图表'</span><span style="--0:#E1E4E8"> } });</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span class="indent">  </span><span style="--0:#B392F0">beforeDestroy</span><span style="--0:#E1E4E8">() {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">31</div></div><div class="code"><span class="indent">    </span><span style="--0:#99A0A6">// 销毁Echarts实例，释放所有资源</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">32</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">33</div></div><div class="code"><span class="indent">    </span><span style="--0:#B392F0">if</span><span style="--0:#E1E4E8"> (this.chart) {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">34</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">35</div></div><div class="code"><span class="indent"> </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.chart.</span><span style="--0:#B392F0">dispose</span><span style="--0:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">36</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">37</div></div><div class="code"><span class="indent">      </span><span style="--0:#79B8FF">this</span><span style="--0:#E1E4E8">.chart </span><span style="--0:#F97583">=</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">null</span><span style="--0:#E1E4E8">; </span><span style="--0:#99A0A6">// 置空避免后续误操作</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">38</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">39</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">    </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">40</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">41</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8">  </span></span><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">42</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">43</div></div><div class="code"><span style="--0:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">44</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">45</div></div><div class="code"><span style="--0:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D">script</span><span style="--0:#E1E4E8">></span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<template>  <div id=&#x22;echart-box&#x22;></div></template><script>import * as echarts from &#x27;echarts&#x27;;export default {  data() {    return { chart: null };  },  mounted() {    // 初始化Echarts实例    this.chart = echarts.init(document.getElementById(&#x27;echart-box&#x27;));    this.chart.setOption({ title: { text: &#x27;测试图表&#x27; } });  },  beforeDestroy() {    // 销毁Echarts实例，释放所有资源    if (this.chart) { this.chart.dispose();      this.chart = null; // 置空避免后续误操作    }  }}</script>"><div></div></button></div></figure></div>
+<h2 id="五补充activated-和-deactivated-生命周期钩子">五、补充：activated 和 deactivated 生命周期钩子</h2>
+<p><code>activated</code> 和 <code>deactivated</code> 生命周期钩子，仅在被 <keep-alive> 包裹的组件中才会被触发。</keep-alive></p>
+<h3 id="1-activated-钩子">1. activated 钩子</h3>
+<p>核心作用：缓存组件实例，组件从缓存中激活时触发。</p>
+<ul>
+<li>
+<p>第一次显示（页面加载时 show:true）：子组件先执行 created/mounted 等普通钩子，然后立刻执行 activated；</p>
+</li>
+<li>
+<p>后续再次显示（比如先把 show 改为 false，再改回 true）：组件不会重新执行 created/mounted（因为实例被缓存了），只会执行 activated。</p>
+</li>
+</ul>
+<h3 id="2-deactivated-钩子">2. deactivated 钩子</h3>
+<p>当组件因 v-show=“false” 等原因隐藏时触发（注意：此时组件实例没有被销毁，只是进入缓存状态），而非执行 beforeDestroy/destroyed。</p>
+<h2 id="六总结vue2-生命周期钩子">六、总结：Vue2 生命周期钩子</h2>
+<p>| 生命周期钩子 | 阶段核心说明 | 原生 JS 类比 | 原生 JS 核心对应操作 |</p>
+<p>|--------------|--------------|--------------|----------------------|</p>
+<p>| beforeCreate | 组件实例刚创建，data/methods/props 未初始化，无法访问 | JS 对象初始化初期（仅创建空对象，无属性 / 方法） | 创建空对象，未定义任何数据 / 方法 |</p>
+<p>| created      | 组件实例创建完成，data/methods/props 已初始化，无 DOM（$el 不存在） | JS 对象初始化完成（已定义属性 / 方法，未接触 DOM） | 为对象赋值数据、绑定方法，不操作 DOM |</p>
+<p>| beforeMount  | 模板编译完成，$el 已生成但未挂载到页面真实 DOM | DOM 准备阶段（创建元素但未插入页面） | 创建 DOM 元素、拼接模板内容，未插入页面 |</p>
+<p>| mounted      | 模板挂载到页面真实 DOM，可正常操作 DOM，是 DOM 操作最佳时机 | DOM 加载完成后（DOM 树构建完毕，元素可访问） | 监听 DOMContentLoaded，将元素插入页面并操作 |</p>
+<p>| beforeUpdate | 响应式数据变化，DOM 仍为旧值（未更新） | 数据修改后、DOM 更新前 | 修改数据变量，未手动更新 DOM |</p>
+<p>| updated      | DOM 已随数据变化完成更新，可获取最新 DOM 内容 | 数据修改后、手动更新 DOM 完成 | 根据新数据更新 DOM 内容 |</p>
+<p>| destroyed    | 组件已销毁，响应式数据 / 事件 / 定时器被清理，DOM 不可用 | 资源清理完成（移除 DOM / 事件 / 定时器） | 清除定时器、移除事件监听、删除 DOM 元素 |</p>
+<h3 id="核心钩子使用场景总结">核心钩子使用场景总结</h3>
+<ol>
+<li>created 的主要使用场景：</li>
+</ol>
+<ul>
+<li>
+<p>初始化数据</p>
+</li>
+<li>
+<p>发起无需依赖 DOM的网络请求</p>
+</li>
+</ul>
+<ol start="2">
+<li>mounted 的主要使用场景：</li>
+</ol>
+<ul>
+<li>
+<p>操作 DOM（如初始化 echarts、swiper、地图等第三方插件）</p>
+</li>
+<li>
+<p>获取 DOM 尺寸 / 位置（如计算元素高度、滚动位置）</p>
+</li>
+<li>
+<p>绑定依赖 DOM 的事件监听（如自定义滚动事件）</p>
+</li>
+</ul>
+<ol start="3">
+<li>beforeDestroy 的主要使用场景：</li>
+</ol>
+<ul>
+<li>
+<p>清理定时器</p>
+</li>
+<li>
+<p>解绑全局自定义事件</p>
+</li>
+<li>
+<p>销毁第三方库实例</p>
+</li>
+</ul>  <div class="_ccBox_1rj8d_3"> <div class="_ccContent_1rj8d_15"> <h2 class="_ccTitle_1rj8d_20">《vue2 生命周期》</h2> <p class="_ccAuthor_1rj8d_27">作者：felinus</p> <p class="_ccUrl_1rj8d_28">
+本文链接：
+<a href="https://stalux.needhelp.icu/posts/f8882808/" target="_blank" rel="noopener noreferrer"> https://stalux.needhelp.icu/posts/f8882808/ </a> </p> <p class="_ccLicense_1rj8d_29">
+本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 </a> 进行许可。
+</p> </div> <div class="_ccWatermark_1rj8d_57"> <div class="_ccIcon_1rj8d_71"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+    <path fill="#cccccc"
+        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.408 5.89c-.83 0-1.318.64-1.318 1.753v.742c0 1.108.479 1.727 1.318 1.727c.69 0 1.138-.435 1.187-1.05h1.147v.114c-.058 1.147-1.029 1.938-2.343 1.938c-1.612 0-2.518-1.028-2.518-2.729v-.747c0-1.7.914-2.75 2.518-2.75c1.319 0 2.29.812 2.343 1.999v.11H6.595c-.049-.638-.506-1.108-1.187-1.108Zm5.404 0c-.831 0-1.319.64-1.319 1.753v.742c0 1.108.48 1.727 1.319 1.727c.69 0 1.138-.435 1.186-1.05h1.147v.114c-.057 1.147-1.028 1.938-2.342 1.938c-1.613 0-2.518-1.028-2.518-2.729v-.747c0-1.7.914-2.75 2.518-2.75c1.318 0 2.29.812 2.342 1.999v.11h-1.147c-.048-.638-.505-1.108-1.186-1.108Z" />
+</svg></div> </div> </div> <nav class="_postNavigation_y8hcc_3" aria-label="文章导航"><div class="_postNavigationInner_y8hcc_10"><a href="/posts/f8882809" class="_postNavLink_y8hcc_16 _prevPost_y8hcc_66" rel="prev"><span class="_postNavArrow_y8hcc_84"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></span><div class="_postNavContent_y8hcc_77"><span class="_postNavLabel_y8hcc_93">上一篇</span><span class="_postNavTitle_y8hcc_100">《JS 异步编程、Promise及事件循环详解》</span></div></a><a href="/posts/f8882807" class="_postNavLink_y8hcc_16 _nextPost_y8hcc_71" rel="next"><div class="_postNavContent_y8hcc_77"><span class="_postNavLabel_y8hcc_93">下一篇</span><span class="_postNavTitle_y8hcc_100">《Vue2 插槽（Slot）全面讲解》</span></div><span class="_postNavArrow_y8hcc_84"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span></a></div></nav>  </div> </article> <script type="module" src="/_astro/postContent.astro_astro_type_script_index_0_lang.DlSxVjBN.js"></script> <!-- Right Sidebar --> <aside class="_rightSidebar_oq5jb_3" data-astro-transition-scope="astro-xsqpu3ek-3"> <div class="_sidebarContainer_oq5jb_30"> <div id="_date-time_dgl25_1" class="date-time" transition:persist-props> <time id="_date_dgl25_1" data-ref="date" datetime=""></time> <time id="_time_dgl25_1" data-ref="time" datetime=""></time> </div> <script type="module" src="/_astro/date.astro_astro_type_script_index_0_lang.CWDmrq54.js"></script> </div> <div class="_sidebarContainer_oq5jb_30"> <div data-astro-transition-scope="astro-totingjx-4"> <h3 class="_title_2k4cs_1">目录</h3> <ul class="_list_2k4cs_10" data-astro-transition-scope="astro-kyqfwumi-5"> <li> <a class="_item_2k4cs_19 _depth-1_2k4cs_45 a-none" href="#vue2-组件化与生命周期钩子"> Vue2 组件化与生命周期钩子 </a> </li><li> <a class="_item_2k4cs_19 _depth-2_2k4cs_49 a-none" href="#一vue2-的组件化"> 一、Vue2 的组件化 </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#1-什么是vue2-的组件化"> 1. 什么是Vue2 的组件化？ </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#2-为什么需要组件化"> 2. 为什么需要组件化？ </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#生命周期流程图"> 生命周期流程图 </a> </li><li> <a class="_item_2k4cs_19 _depth-2_2k4cs_49 a-none" href="#二示例代码"> 二、示例代码 </a> </li><li> <a class="_item_2k4cs_19 _depth-2_2k4cs_49 a-none" href="#三代码的结构"> 三、代码的结构 </a> </li><li> <a class="_item_2k4cs_19 _depth-2_2k4cs_49 a-none" href="#四打开开发者工具开始进行测试"> 四、打开开发者工具开始进行测试 </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#1-beforecreate-和-created"> 1. beforeCreate 和 created </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#使用场景"> 使用场景： </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#2-beforemount-和-mounted"> 2. beforeMount 和 mounted </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#打印结果说明"> 打印结果说明： </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#类比说明"> 类比说明： </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#测试操作"> 测试操作： </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#mounted使用场景"> mounted使用场景： </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#验证结果"> 验证结果： </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#3-beforedestroy-和-destroyed"> 3. beforeDestroy 和 destroyed </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#测试操作-1"> 测试操作： </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#打印结果说明-1"> 打印结果说明： </a> </li><li> <a class="_item_2k4cs_19 _depth-4_2k4cs_59 a-none" href="#beforedestroy使用场景"> beforeDestroy使用场景： </a> </li><li> <a class="_item_2k4cs_19 _depth-5_2k4cs_60 a-none" href="#场景1清理定时器"> 场景1：清理定时器 </a> </li><li> <a class="_item_2k4cs_19 _depth-5_2k4cs_60 a-none" href="#场景2解绑全局自定义事件"> 场景2：解绑全局自定义事件 </a> </li><li> <a class="_item_2k4cs_19 _depth-5_2k4cs_60 a-none" href="#场景3销毁第三方库实例"> 场景3：销毁第三方库实例 </a> </li><li> <a class="_item_2k4cs_19 _depth-2_2k4cs_49 a-none" href="#五补充activated-和-deactivated-生命周期钩子"> 五、补充：activated 和 deactivated 生命周期钩子 </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#1-activated-钩子"> 1. activated 钩子 </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#2-deactivated-钩子"> 2. deactivated 钩子 </a> </li><li> <a class="_item_2k4cs_19 _depth-2_2k4cs_49 a-none" href="#六总结vue2-生命周期钩子"> 六、总结：Vue2 生命周期钩子 </a> </li><li> <a class="_item_2k4cs_19 _depth-3_2k4cs_54 a-none" href="#核心钩子使用场景总结"> 核心钩子使用场景总结 </a> </li> </ul> </div> </div> <div class="_sidebarContainer_oq5jb_30"> <div class="_tagsContainer_44mcg_1" data-astro-transition-scope="astro-pmjdhh2p-6"> <h3 class="_title_44mcg_7">标签</h3> <div class="_tagList_44mcg_16" data-astro-transition-scope="astro-kfg5vjwi-7"> <a href="/tags/前端/" class="_tag_44mcg_1 a-none"> 前端 </a><a href="/tags/Vue2/" class="_tag_44mcg_1 a-none"> Vue2 </a><a href="/tags/生命周期/" class="_tag_44mcg_1 a-none"> 生命周期 </a> </div> </div> </div> <div class="_sidebarContainer_oq5jb_30"> <div class="_categoriesContainer_vljh5_1" data-astro-transition-scope="astro-sw3nizyg-8"> <h3 class="_title_vljh5_7">分类</h3> <div class="_categoryList_vljh5_16" data-astro-transition-scope="astro-rv2deft4-9"> <a href="/categories/前端/" class="_category_vljh5_16 a-none"> 前端 </a><a href="/categories/生命周期/" class="_category_vljh5_16 a-none"> 生命周期 </a><a href="/categories/Vue2/" class="_category_vljh5_16 a-none"> Vue2 </a> </div> </div> </div> </aside> </div> </div>   </main></body></html>
