@@ -2,7 +2,6 @@ import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 // @ts-check
-import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
@@ -15,7 +14,6 @@ const site = "https://stalux.needhelp.icu";
 export default defineConfig({
     output: "static",
     site: "https://felinus-stack.github.io",
-     base: '/felinus-blog',
     experimental: {
         rustCompiler: false,
         queuedRendering: {
