@@ -8,12 +8,14 @@ import remarkMath from "remark-math";
 
 import rehypePhotoswipe from "./src/utils/rehype-photoswipe";
 import { remarkPostBody } from "./src/utils/remark-post-body";
+import {defineConfig} from 'astro/config'
 
 const site = "https://stalux.needhelp.icu";
 // https://astro.build/config
 export default defineConfig({
     output: "static",
-    site: site,
+    site: "https://felinus-stack.github.io",
+     base: '/felinus-blog',
     experimental: {
         rustCompiler: false,
         queuedRendering: {
