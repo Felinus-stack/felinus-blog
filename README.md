@@ -1,23 +1,3 @@
-**本项目由阿里云ESA提供加速、计算和保护**
-
-![阿里云加速](aliyun.png)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/felinus/stalux)
-[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https://github.com/felinus/stalux)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/felinus/stalux)
-
-**#阿里云ESA Pages** **#阿里云云工开物话题**
-
-# Stalux - 现代 Astro 博客主题
-
-![多端预览](image.png)
-
-## **[stalux.needhelp.icu](https://stalux.needhelp.icu)**
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/felinus/stalux)
-
-**本博客主题已有[软著](./软著证明.pdf)，受中国版权相关法律保护，请务必遵守 [LICENSE 许可证](./LICENSE)（MIT 协议）**
-
 <p align="center">
   优雅、高性能、易配置的 Astro 静态博客主题
 </p>
