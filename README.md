@@ -2,9 +2,9 @@
 
 ![阿里云加速](aliyun.png)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/xingwangzhe/stalux)
-[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https://github.com/xingwangzhe/stalux)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/xingwangzhe/stalux)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/felinus/stalux)
+[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https://github.com/felinus/stalux)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/felinus/stalux)
 
 **#阿里云ESA Pages** **#阿里云云工开物话题**
 
@@ -14,7 +14,7 @@
 
 ## **[stalux.needhelp.icu](https://stalux.needhelp.icu)**
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/xingwangzhe/stalux)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/felinus/stalux)
 
 **本博客主题已有[软著](./软著证明.pdf)，受中国版权相关法律保护，请务必遵守 [LICENSE 许可证](./LICENSE)（MIT 协议）**
 
@@ -32,7 +32,7 @@
 
 ```yaml
 stalux:
-    title: Stalux博客主题
+    title: 个人博客
     url: https://stalux.needhelp.icu
     description: "博客主题Stalux - 为内容创作者提供的专业展示平台，支持多种自定义功能，包含评论系统集成、友情链接管理、社交媒体分享和丰富的SEO优化选项，让您的内容更具吸引力和可发现性。"
     # canonical: # 源指向 默认为 stalux.url
@@ -54,7 +54,7 @@ stalux:
     favicon: "/stalux.ico" # 网站图标路径，默认为根路径下
 
     author:
-        name: xingwangzhe
+        name: felinus
         avatar: /avatar.png
         bio: 博客主题Stalux
 
@@ -82,14 +82,14 @@ stalux:
           link: https://www.travellings.cn/go
 
     typetexts:
-        - "Free for free, not free for charge!"
-        - "任意键在哪?"
-        - "F12看看?"
-        - "Hello World!"
+        - "While there is life there is hope!"
+        - "Faith will move mountains."
+        - "Fancy may kill or cure."
+        - "If you live with a lame person, you will learn to limp. "
 
     mediaLinks:
         - icon: github
-          link: https://github.com/xingwangzhe/stalux
+          link: https://github.com/felinus/stalux
         - icon: bilibili
           link: https://bilibili.com/
         - icon: X
@@ -99,7 +99,7 @@ stalux:
         - icon: zhihu
           link: https://www.zhihu.com/
         - icon: maildotru
-          link: mailto:xingwangzhe@outlook.com
+          link: mailto:felinus@outlook.com
         - icon: telegram
           link: https://t.me/
 
@@ -167,18 +167,18 @@ stalux:
               message: "Stalux"
               color: "blueviolet"
               alt: "Theme: Stalux"
-              href: "https://github.com/xingwangzhe/stalux"
+              href: "https://github.com/felinus/stalux"
             - label: "Built with"
               message: "❤"
               color: "red"
               style: "for-the-badge"
               alt: "Built with Love"
-              href: "https://github.com/xingwangzhe"
+              href: "https://github.com/felinus"
             - label: "license"
               message: "MIT"
               color: "blue"
               alt: "License: MIT"
-              href: "https://github.com/xingwangzhe/stalux/blob/main/LICENSE"
+              href: "https://github.com/felinus/stalux/blob/main/LICENSE"
             - label: "软著"
               message: "登记号 2025SR2258474"
               color: "yellowgreen"
@@ -218,7 +218,7 @@ stalux:
     comment:
         enabled: false # 添加一个开关来启用或禁用评论区，默认关闭
         waline:
-            serverURL: https://walines.xingwangzhe.fun
+            serverURL: https://walines.felinus.fun
             lang: zh-CN
             # locale: # 可选，自定义语言配置
             login: "force" # 'enable' | 'disable' | 'force'（开启强制登录可防止伪造）
@@ -245,7 +245,7 @@ stalux:
 快速开始示例：
 
 ```bash
-git clone https://github.com/xingwangzhe/stalux.git my-blog
+git clone https://github.com/felinus/stalux.git my-blog
 cd my-blog
 # 推荐使用 Bun：
 bun install

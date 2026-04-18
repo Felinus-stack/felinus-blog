@@ -21,7 +21,7 @@ abbrlink: f4442947
 comment:
     enabled: false
     waline:
-        serverURL: "https://walines.xingwangzhe.fun"
+        serverURL: "https://walines.felinus.fun"
         lang: zh-CN
         # locale: # 可选，自定义语言配置
         login: "enable" # 'enable' | 'disable' | 'force'（开启强制登录可防止伪造）

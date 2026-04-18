@@ -1,5 +1,6 @@
 .postContainer {
     background-color: var(--card-bg);
+    backdrop-filter: blur(5px);
     border-radius: var(--radius-lg);
     border: var(--border-thin) solid var(--card-border);
     box-shadow: var(--card-box-shadow);

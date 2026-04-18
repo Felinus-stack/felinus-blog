@@ -23,6 +23,7 @@
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     background-color: var(--white-10p);
+    backdrop-filter: blur(5px);
     color: var(--white-full);
     text-decoration: none;
     transition: all var(--transition-slow);

@@ -8,7 +8,7 @@ body {
     main {
         flex: 1;
     }
-    scrollbar-color: #4a4a4a #2a2a2a;
+    scrollbar-color: #606060 #a0a0a0;
     display: block;
 }
 
@@ -104,29 +104,29 @@ ul {
 
 /* 默认 stalux 背景的 CSS 变量（非动态默认值） */
 :root {
-    --stalux-bg-color: #202020;
+    --stalux-bg-color: #808080;
     --stalux-bg-filter: none;
     --stalux-text-shadow: #64ffda 0.1rem 0.1rem 0.2rem;
     --stalux-accent-color: #64ffda;
-    --stalux-search-backdrop: rgba(0, 0, 0, 0.1);
-    --stalux-search-box-bg: rgba(0, 0, 0, 0.1);
-    --stalux-search-border: rgba(0, 0, 0, 0.2);
+    --stalux-search-backdrop: rgba(128, 128, 128, 0.2);
+    --stalux-search-box-bg: rgba(255, 255, 255, 0.1);
+    --stalux-search-border: rgba(255, 255, 255, 0.2);
 
     /* 卡片和标签颜色 Token（可在这里统一调整主题色/透明度） */
-    --card-bg: rgba(0, 0, 0, 0.2);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --card-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --card-box-shadow-hover: 0 8px 28px rgba(0, 0, 0, 0.5);
+    --card-bg: rgba(255, 255, 255, 0.15);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --card-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --card-box-shadow-hover: 0 8px 28px rgba(0, 0, 0, 0.3);
 
-    --tag-bg: rgba(255, 255, 255, 0.12);
-    --tag-bg-hover: rgba(255, 255, 255, 0.18);
-    --category-bg: rgba(255, 255, 255, 0.08);
-    --category-bg-hover: rgba(255, 255, 255, 0.14);
+    --tag-bg: rgba(255, 255, 255, 0.25);
+    --tag-bg-hover: rgba(255, 255, 255, 0.35);
+    --category-bg: rgba(255, 255, 255, 0.2);
+    --category-bg-hover: rgba(255, 255, 255, 0.3);
 
-    --date-bg: rgba(66, 160, 255, 0.18);
-    --date-border: rgba(66, 160, 255, 0.25);
-    --updated-bg: rgba(255, 201, 71, 0.2);
-    --updated-border: rgba(255, 201, 71, 0.3);
+    --date-bg: rgba(66, 160, 255, 0.3);
+    --date-border: rgba(66, 160, 255, 0.4);
+    --updated-bg: rgba(255, 201, 71, 0.35);
+    --updated-border: rgba(255, 201, 71, 0.45);
 
     /* 常用颜色值 */
     --white-full: #ffffff;
@@ -196,12 +196,12 @@ ul {
     --radius-circle: 50%;
 
     /* 常用阴影 */
-    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.3);
-    --shadow-xl: 0 12px 26px rgba(0, 0, 0, 0.28);
-    --shadow-sidebar: 0 4px 6px rgba(0, 0, 0, 0.753);
-    --shadow-dark: rgba(0, 0, 0, 0.753);
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 12px 26px rgba(0, 0, 0, 0.2);
+    --shadow-sidebar: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-dark: rgba(0, 0, 0, 0.4);
 
     /* 语义化颜色 */
     --date-text-color: #e8f2ff;
@@ -230,22 +230,22 @@ ul {
 }
 
 ::-webkit-scrollbar-track {
-    background: #2a2a2a;
+    background: #a0a0a0;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4a4a4a;
+    background: #606060;
     border-radius: 4px;
     transition: background 0.3s ease-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #5a5a5a;
+    background: #505050;
 }
 
 ::-webkit-scrollbar-corner {
-    background: #2a2a2a;
+    background: #a0a0a0;
 }
 
 /* 背景层 - 与 Astro View Transitions 同步的双层 crossfade 系统 */
