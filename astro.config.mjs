@@ -14,6 +14,7 @@ const site = "https://stalux.needhelp.icu";
 export default defineConfig({
     output: "static",
     site: "https://felinus-stack.github.io",
+    base: '/felinus-blog/',
     experimental: {
         rustCompiler: false,
         queuedRendering: {
