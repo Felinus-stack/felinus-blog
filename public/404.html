@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        // 自动重定向到首页，并交给 Astro 路由处理
+        const base = '/felinus-blog/';
+        const path = window.location.pathname.replace(base, '');
+        window.location.href = base + '?redirect=' + encodeURIComponent(path);
+    </script>
+</head>
+<body>
+    页面加载中...
+</body>
+</html>
