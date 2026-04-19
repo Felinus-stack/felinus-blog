@@ -13,8 +13,8 @@ const site = "https://stalux.needhelp.icu";
 // https://astro.build/config
 export default defineConfig({
     output: "static",
-    site: "https://felinus-stack.github.io",
-    base: '/felinus-blog/',
+    site: "https://felinus-blog.vercel.app",
+    // base: '/felinus-blog/',
     experimental: {
         rustCompiler: false,
         queuedRendering: {
