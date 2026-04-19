@@ -1,0 +1,45 @@
+name: Deploy Astro site to GitHub Pages
+
+# 触发条件：当代码推送到main分支时自动部署
+on:
+  push:
+    branches: [ main ]
+
+# 设置权限，让GitHub可以部署到Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 并发设置：同一时间只允许一个部署任务
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          # 关键：设置符合Astro要求的Node.js版本（>=22.12.0）
+          node-version: 22
+          cache: 'npm' # 缓存依赖，加快安装速度
+
+      - name: 安装依赖
+        run: npm install # 比npm install更稳定，适合CI环境
+
+      - name: 打包 Astro
+        run: npm run build
+
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist # Astro默认的构建输出目录
+
+      - name: 部署到 GitHub Pages
+        uses: actions/deploy-pages@v4
