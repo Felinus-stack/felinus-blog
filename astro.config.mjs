@@ -1,20 +1,19 @@
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
+import { defineConfig } from "astro/config";
 // @ts-check
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 import rehypePhotoswipe from "./src/utils/rehype-photoswipe";
 import { remarkPostBody } from "./src/utils/remark-post-body";
-import {defineConfig} from 'astro/config'
 
 const site = "https://stalux.needhelp.icu";
 // https://astro.build/config
 export default defineConfig({
     output: "static",
     site: "https://felinus-blog.vercel.app",
-    // base: '/felinus-blog/',
     experimental: {
         rustCompiler: false,
         queuedRendering: {
