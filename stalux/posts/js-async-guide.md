@@ -9,9 +9,9 @@ tags:
 categories:
     - 前端
     - JS
-date: " 2025-12-26 17:55:44"
-updated: "2026-04-24 00:00:00"
-abbrlink: f8882809
+date: "2025-07-17 17:55:44"
+updated: "2025-07-17 17:55:44"
+abbrlink: f888287
 ---
 
 # JS 异步编程、Promise及事件循环详解

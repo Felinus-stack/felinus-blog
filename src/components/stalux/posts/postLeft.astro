@@ -1,10 +1,28 @@
 ---
-import PostAuthor from "@components/stalux/posts/postAuthor.astro";
+import PostToc from "@components/stalux/posts/postToc.astro";
 import style from "@styles/components/posts/postLeft.module.css";
-import RandomPost from "@components/stalux/posts/randomPost.astro";
 import { fade } from "astro:transitions";
-// 判断是否为文章页面
+import { getCollection } from "astro:content";
+
+interface TocHeading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+interface Props {
+    headings?: TocHeading[];
+    date?: string;
+    updated?: string;
+    readingTime?: string;
+    wordCount?: number;
+    categories?: string[];
+}
+
+const { headings = [], date, updated, readingTime, wordCount, categories = [] } = Astro.props;
+
 const isPostPage = Astro.url.pathname.includes("/posts/");
+const stalux = (await getCollection("config"))[0].data;
 ---
 
 <aside
@@ -12,10 +30,54 @@ const isPostPage = Astro.url.pathname.includes("/posts/");
     transition:name="left-sidebar"
     transition:animate={fade({ duration: "0.3s" })}
 >
-    <PostAuthor />
-    <div class={style.sidebarContainer}>
-        <RandomPost />
-    </div>
+    {isPostPage && (
+        <>
+            <div class={style.sidebarContainer}>
+                <PostToc headings={headings} title="文章目录" />
+            </div>
+
+            <div class={style.sidebarContainer}>
+                <h3 class={style.infoTitle}>本文信息</h3>
+                <ul class={style.infoList}>
+                    {date && (
+                        <li class={style.infoItem}>
+                            <span class={style.infoIcon}>📅</span>
+                            <span class={style.infoLabel}>发布日期</span>
+                            <span class={style.infoValue}>{date.split(" ")[0]}</span>
+                        </li>
+                    )}
+                    {updated && (
+                        <li class={style.infoItem}>
+                            <span class={style.infoIcon}>🔄</span>
+                            <span class={style.infoLabel}>更新时间</span>
+                            <span class={style.infoValue}>{updated.split(" ")[0]}</span>
+                        </li>
+                    )}
+                    {wordCount && wordCount > 0 && (
+                        <li class={style.infoItem}>
+                            <span class={style.infoIcon}>📝</span>
+                            <span class={style.infoLabel}>字数</span>
+                            <span class={style.infoValue}>{wordCount}</span>
+                        </li>
+                    )}
+                    {readingTime && (
+                        <li class={style.infoItem}>
+                            <span class={style.infoIcon}>⏱️</span>
+                            <span class={style.infoLabel}>阅读时间</span>
+                            <span class={style.infoValue}>{readingTime}</span>
+                        </li>
+                    )}
+                    <li class={style.infoItem}>
+                        <span class={style.infoIcon}>👁️</span>
+                        <span class={style.infoLabel}>阅读量</span>
+                        <span class={style.infoValue}>
+                            <span id="vercount_value_page_pv_sidebar">Loading...</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </>
+    )}
 
     <style define:vars={style}>
         :global(.stalux-root) {

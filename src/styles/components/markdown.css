@@ -60,12 +60,12 @@
 
 [data-pagefind-body] strong {
     font-weight: 600;
-    color: #ffd966;
+    color: #333;
 }
 
 [data-pagefind-body] code {
-    color: #ff79c6;
-    background-color: rgba(255, 121, 198, 0.1);
+    color: #c7254e;
+    background-color: rgba(199, 37, 78, 0.1);
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-size: 0.9em;

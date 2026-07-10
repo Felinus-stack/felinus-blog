@@ -1,15 +1,18 @@
 --- 
 title: Chrome DevTools MCP 在食友后台项目中的提效指南 
 tags:
-    - AI
     - DevTools
     - MCP
+    - Chrome
+    - 调试工具
+    - 前端开发
 categories:
-    - DevTools
+    - 开发工具
+    - 前端开发
 
-date: "  2026-05-16 22:20:19 "
-updated: " 2026-05-2 11:34:58"
-abbrlink: f8882816
+date: "2026-05-19 22:20:19"
+updated: "2026-05-19 22:20:19"
+abbrlink: f888284
 ---
 
 # Chrome DevTools MCP 在食友后台项目中的提效指南

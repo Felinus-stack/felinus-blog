@@ -28,7 +28,10 @@ function getLayerEl(layer: "a" | "b"): HTMLElement | null {
 
 function setLayerImage(layer: "a" | "b", url: string): void {
     const el = getLayerEl(layer);
-    if (el) el.style.backgroundImage = `url('${url}')`;
+    if (el) {
+        el.style.backgroundImage = `url('${url}')`;
+        el.style.backgroundSize = '1920px 1200px';
+    }
 }
 
 function setLayerOpacity(layer: "a" | "b", opacity: number): void {
@@ -82,6 +85,7 @@ document.addEventListener("astro:before-swap", (event: any) => {
     if (nextEl) {
         if (nextIndex >= 0) {
             nextEl.style.backgroundImage = `url('${backgroundImages[nextIndex]}')`;
+            nextEl.style.backgroundSize = '1920px 1200px';
         }
         nextEl.classList.add("vt-active");
         nextEl.style.opacity = "1";

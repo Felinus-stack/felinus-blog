@@ -8,9 +8,9 @@ categories:
     - 前端
     - Vuex
     - Vue2
-date: "2026-01-26 14:12:05"
-updated: "2026-04-24 00:00:00"
-abbrlink: f8882806
+date: "2025-09-23 14:12:05"
+updated: "2025-09-23 14:12:05"
+abbrlink: f8882827
 ---
 
 # Vue2 Vuex 核心用法实操（含分模块）

@@ -12,59 +12,72 @@ interface Props {
     readingTime?: string;
     wordCount?: number;
     hasImage?: boolean;
+    categories?: string[];
+    tags?: string[];
 }
 
 const props = Astro.props as Props;
 const stalux = (await getCollection("config"))[0]?.data;
 const timezone = stalux?.timezone;
+const categories = props.categories ?? [];
 ---
 
 <article
     class={style.articleContent}
     transition:name="post-content"
     transition:animate={fade({ duration: "1.2s" })}>
+    <!-- Breadcrumb Navigation -->
+    <nav class={style.breadcrumb}>
+        <a href="/" class={style.breadcrumbLink}>首页</a>
+        <span class={style.breadcrumbSeparator}>/</span>
+        <a href="/categories" class={style.breadcrumbLink}>文章</a>
+        {categories.length > 0 && (
+            <>
+                <span class={style.breadcrumbSeparator}>/</span>
+                <a href={`/categories/${categories[0]}`} class={style.breadcrumbLink}>{categories[0]}</a>
+            </>
+        )}
+    </nav>
+
     <!-- Article Header -->
     <header class={style.articleHeader}>
         <h1 class={style.title}>{props.title}</h1>
-        <div class={style.metadata}>
+        <div class={style.metaRow}>
             {
                 props.date && (
-                    <time class={style.metaItem} datetime={timezone ? toMachineDateTime(props.date, timezone) : props.date}>
-                        发布时间：
-                        {props.date}
-                    </time>
+                    <span class={style.metaItem}>
+                        <span class={style.metaIcon}>📅</span>
+                        发布于 {props.date}
+                    </span>
                 )
             }
-
             {
                 props.updated && (
-                    <time class={style.metaItem} datetime={timezone ? toMachineDateTime(props.updated, timezone) : props.updated}>
-                        更新时间：
-                        {props.updated}
-                    </time>
+                    <span class={style.metaItem}>
+                        <span class={style.metaIcon}>🔄</span>
+                        更新于 {props.updated}
+                    </span>
                 )
             }
         </div>
-        {
-            (props.readingTime || true) && (
-                <div class={style.pageStats}>
-                    {props.readingTime && (
-                        <span class={style.readingTime}>
-                            🕒 阅读时间：{props.readingTime}
-                        </span>
-                    )}
-                    {props.wordCount && props.wordCount > 0 && (
-                        <span class={style.wordCount}>
-                            📝 字数：{props.wordCount}
-                        </span>
-                    )}
-                    <span id="vercount_container_page_pv">
-                        👀 阅读量：
-                        <span id="vercount_value_page_pv">Loading...</span>
-                    </span>
-                </div>
-            )
-        }
+        <div class={style.metaRow}>
+            {props.readingTime && (
+                <span class={style.metaItem}>
+                    <span class={style.metaIcon}>⏱️</span>
+                    阅读时间 {props.readingTime}
+                </span>
+            )}
+            {props.wordCount && props.wordCount > 0 && (
+                <span class={style.metaItem}>
+                    <span class={style.metaIcon}>📝</span>
+                    字数 {props.wordCount}
+                </span>
+            )}
+            <span class={style.metaItem}>
+                <span class={style.metaIcon}>👁️</span>
+                阅读量 <span id="vercount_value_page_pv">Loading...</span>
+            </span>
+        </div>
     </header>
 
     <!-- Article Body -->

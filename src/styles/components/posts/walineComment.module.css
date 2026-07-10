@@ -34,7 +34,7 @@
 .walineComment :global(.wl-editor),
 .walineComment :global(.wl-input) {
     background-color: rgba(17, 17, 17, 0.5);
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(100, 100, 100, 0.3);
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -51,7 +51,7 @@
 /* 按钮样式统一 */
 .walineComment :global(.wl-btn) {
     background: rgba(1, 162, 190, 0.8);
-    color: #fff;
+    color: #000;
     border: none;
     border-radius: 6px;
     transition: all 0.2s ease;
@@ -76,7 +76,7 @@
 
 /* 标签文字颜色 */
 .walineComment :global(.wl-header label) {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
 }
 
@@ -123,7 +123,7 @@
 
 /* 评论内容样式 */
 .walineComment :global(.wl-content) {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.9);
     line-height: 1.7;
     margin: 0.8rem 0;
     word-break: break-word;
@@ -201,7 +201,7 @@
     font-size: 0.8rem;
     padding: 5px 0;
     background-color: rgba(1, 162, 190, 0.7);
-    color: #fff;
+    color: #000;
 }
 
 /* 评论计数和排序 */
@@ -217,7 +217,7 @@
 .walineComment :global(.wl-count) {
     font-size: 1.1rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.9);
 }
 
 .walineComment :global(.wl-sort) {
@@ -228,11 +228,11 @@
 .walineComment :global(.wl-sort li) {
     cursor: pointer;
     transition: all 0.2s ease;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .walineComment :global(.wl-sort li:hover) {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.9);
 }
 
 .walineComment :global(.wl-sort li.active) {
@@ -248,7 +248,7 @@
 
 .walineComment :global(.wl-page button) {
     background: rgba(30, 30, 30, 0.5);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(70, 70, 70, 0.3);
     border-radius: 6px;
     margin: 0 5px;
@@ -258,13 +258,13 @@
 
 .walineComment :global(.wl-page button:hover:not(:disabled)) {
     background: rgba(1, 162, 190, 0.7);
-    color: #fff;
+    color: #000;
     transform: translateY(-2px);
 }
 
 .walineComment :global(.wl-page button.active) {
     background: rgba(1, 162, 190, 0.8);
-    color: #fff;
+    color: #000;
 }
 
 /* Waline底部版权信息 */
@@ -290,14 +290,14 @@
 .walineComment :global(.wl-empty) {
     text-align: center;
     padding: 2rem 0;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     font-size: 1.1rem;
 }
 
 /* 支持文字数量统计 */
 .walineComment :global(.wl-text-number) {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 /* 添加动画效果 */

@@ -8,13 +8,13 @@ tags:
 categories:
     - AI
     - React
-date: "  2026-04-25 11:34:58  "
-updated: " 2026-04-25 11:34:58"
-abbrlink: f8882814
+date: "2026-01-03 11:34:58"
+updated: "2026-01-03 11:34:58"
+abbrlink: f8882810
 ---
 # 在大模型（LLM）应用开发中，一个非常现实的问题是：
 
-## ❓ 不同模型接口各不相同，如何优雅地统一调用？
+##  不同模型接口各不相同，如何优雅地统一调用？
 
 比如：
 
@@ -29,7 +29,7 @@ abbrlink: f8882814
 
 ---
 
-# 🧠 一、LangChain 是什么？
+#  一、LangChain 是什么？
 
 一句话总结：
 
@@ -51,7 +51,7 @@ abbrlink: f8882814
 
 ---
 
-# ⚙️ 二、环境准备
+#  二、环境准备
 
 ## 初始化项目（推荐 TypeScript）
 
@@ -88,7 +88,7 @@ QWEN_API_KEY=你的API_KEY
 
 ---
 
-# 🚀 三、第一个 LLM 调用
+# 三、第一个 LLM 调用
 
 ```ts
 import dotenv from "dotenv";
@@ -122,7 +122,7 @@ console.log(res.content);
 
 ---
 
-# 💬 四、消息机制（Messages）——核心设计
+#  四、消息机制（Messages）——核心设计
 
 LangChain 并不是用字符串拼接上下文，而是用**消息对象**：
 
@@ -152,7 +152,7 @@ const res = await llm.invoke(messages);
 
 ---
 
-# ⚡ 五、5 种常用调用方式
+# 五、5 种常用调用方式
 
 ## 1. 普通调用（invoke）
 
@@ -163,8 +163,7 @@ await llm.invoke("你好");
 ```
 
 ---
-
-## 2. 流式调用（stream）🔥
+## 2. 流式调用（stream）
 
 ```ts
 const stream = await llm.stream("简单介绍一下人工智能");
@@ -196,7 +195,7 @@ const res = await llm.batch([
 
 ---
 
-## 4. 结构化输出（JSON）🔥
+## 4. 结构化输出（JSON）
 
 ```ts
 import * as z from "zod";
@@ -246,7 +245,7 @@ console.log(res.content);
 输出结果：
 
 ```text
-你叫小军 😊
+你叫小军 
 刚刚你告诉我你的名字是小军。
 ```
 
@@ -257,7 +256,7 @@ console.log(res.content);
 
 ---
 
-# 🛠️ 六、工具调用（重点🔥🔥🔥）
+#  六、工具调用
 
 这是 LangChain 最强大的能力之一。
 
@@ -317,7 +316,7 @@ const res = await llmWithTools.invoke("北京天气怎么样？");
 
 ---
 
-# 🎯 七、你应该真正理解的 3 件事
+# 七、你应该真正理解的 3 件事
 
 ## 1. LangChain ≠ AI
 
@@ -335,7 +334,7 @@ const res = await llmWithTools.invoke("北京天气怎么样？");
 
 工具调用就是 Agent 的雏形：
 
-👉 AI 可以：
+AI 可以：
 
 * 查天气
 * 查数据库
@@ -344,7 +343,7 @@ const res = await llmWithTools.invoke("北京天气怎么样？");
 
 ---
 
-# 🚀 八、下一步可以做什么？
+# 八、下一步可以做什么？
 
 当你掌握这些后，可以继续进阶：
 
@@ -362,7 +361,7 @@ const res = await llmWithTools.invoke("北京天气怎么样？");
 
 ---
 
-# 🎯 总结
+# 总结
 
 LangChain 的价值不在“封装 API”，而在：
 

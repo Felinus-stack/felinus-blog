@@ -4,7 +4,8 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    color: white;
+    color: black;
+    font-family: "KaiTi", "楷体", serif;
     main {
         flex: 1;
     }
@@ -99,7 +100,7 @@ ul {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: white; /* 默认文本颜色，适用于深色背景 */
+    color: black; /* 默认文本颜色 */
 }
 
 /* 默认 stalux 背景的 CSS 变量（非动态默认值） */
@@ -129,21 +130,21 @@ ul {
     --updated-border: rgba(255, 201, 71, 0.45);
 
     /* 常用颜色值 */
-    --white-full: #ffffff;
-    --white-90p: rgba(255, 255, 255, 0.9);
-    --white-85p: rgba(255, 255, 255, 0.85);
-    --white-80p: rgba(255, 255, 255, 0.8);
-    --white-78p: rgba(255, 255, 255, 0.78);
-    --white-70p: rgba(255, 255, 255, 0.7);
-    --white-60p: rgba(255, 255, 255, 0.6);
-    --white-50p: rgba(255, 255, 255, 0.5);
-    --white-30p: rgba(255, 255, 255, 0.3);
-    --white-20p: rgba(255, 255, 255, 0.2);
-    --white-15p: rgba(255, 255, 255, 0.15);
-    --white-12p: rgba(255, 255, 255, 0.12);
-    --white-10p: rgba(255, 255, 255, 0.1);
-    --white-8p: rgba(255, 255, 255, 0.08);
-    --white-05p: rgba(255, 255, 255, 0.05);
+    --white-full: #000000;
+    --white-90p: rgba(0, 0, 0, 0.9);
+    --white-85p: rgba(0, 0, 0, 0.85);
+    --white-80p: rgba(0, 0, 0, 0.8);
+    --white-78p: rgba(0, 0, 0, 0.78);
+    --white-70p: rgba(0, 0, 0, 0.7);
+    --white-60p: rgba(0, 0, 0, 0.6);
+    --white-50p: rgba(0, 0, 0, 0.5);
+    --white-30p: rgba(0, 0, 0, 0.3);
+    --white-20p: rgba(0, 0, 0, 0.2);
+    --white-15p: rgba(0, 0, 0, 0.15);
+    --white-12p: rgba(0, 0, 0, 0.12);
+    --white-10p: rgba(0, 0, 0, 0.1);
+    --white-8p: rgba(0, 0, 0, 0.08);
+    --white-05p: rgba(0, 0, 0, 0.05);
 
     --black-full: #000000;
     --black-30p: rgba(0, 0, 0, 0.3);
@@ -204,9 +205,9 @@ ul {
     --shadow-dark: rgba(0, 0, 0, 0.4);
 
     /* 语义化颜色 */
-    --date-text-color: #e8f2ff;
-    --updated-text-color: #fff7de;
-    --muted-text: #bbb;
+    --date-text-color: #1a3a5c;
+    --updated-text-color: #5c4a00;
+    --muted-text: #555;
     --border-color-light: #e5e5e5;
 
     /* 字体大小系统 */
@@ -254,7 +255,7 @@ ul {
     inset: 0;
     z-index: -10;
     background-repeat: repeat;
-    background-size: auto;
+    background-size: 1920px 1200px;
     background-position: center;
     background-color: var(--stalux-bg-color, transparent);
     filter: var(--stalux-bg-filter, none);
@@ -274,7 +275,7 @@ ul {
     inset: 0;
     z-index: -10;
     background-repeat: repeat;
-    background-size: auto;
+    background-size: 1920px 1200px;
     background-position: center;
     background-color: var(--stalux-bg-color, transparent);
     filter: var(--stalux-bg-filter, none);

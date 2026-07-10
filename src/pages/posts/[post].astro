@@ -85,3 +85,13 @@ export async function getStaticPaths() {
         <Content />
     </PostLayout>
 </Stalux>
+
+<style>
+    /* 文章详情页：隐藏背景图，使用白色背景 */
+    :global(.bg-layer) {
+        display: none !important;
+    }
+    :global(body) {
+        background-color: #ffffff !important;
+    }
+</style>

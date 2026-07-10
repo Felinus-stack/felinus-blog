@@ -8,9 +8,9 @@ tags:
 categories:
     - AI
     - LangChain
-date: "  2026-05-2 11:34:58  "
-updated: " 2026-05-2 11:34:58"
-abbrlink: f8882815
+date: "2026-02-23 11:34:58"
+updated: "2026-02-23 11:34:58"
+abbrlink: f8882811
 ---
 
 # 从“控制流程”到“数据流”：彻底理解 LCEL 的设计思想
@@ -36,7 +36,7 @@ const response = await model.invoke(formatted);
 
 而 LCEL 做了一件本质不同的事情：
 
-👉 它让你描述“数据如何流动”，而不是“代码如何执行”
+它让你描述“数据如何流动”，而不是“代码如何执行”
 
 来看一行关键代码：
 
@@ -89,8 +89,7 @@ ChatModel（生成回复）
 ## 三、Runnable：一切皆节点
 
 LCEL 能成立的关键，是 LangChain 的一个核心抽象：
-
-👉 所有组件都是 Runnable
+ 所有组件都是 Runnable
 
 包括：
 
@@ -107,7 +106,7 @@ LCEL 能成立的关键，是 LangChain 的一个核心抽象：
 
 这带来一个非常强大的能力：
 
-👉 任何东西都可以拼接进管道
+任何东西都可以拼接进管道
 
 例如：
 
@@ -149,7 +148,7 @@ await chain.invoke({ topic: '闭包' });
 * 控制执行顺序
 * 管理状态
 
-👉 数据“自己流动”
+ 数据“自己流动”
 
 这就是 LCEL 的本质。
 

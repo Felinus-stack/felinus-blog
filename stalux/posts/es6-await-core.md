@@ -7,9 +7,9 @@ tags:
 categories:
     - 前端
     - JavaScript
-date: "2025-11-22 08:41:18"
-updated: "2026-04-24 00:00:00"
-abbrlink: f8882813
+date: "2025-06-13 08:41:18"
+updated: "2025-06-13 08:41:18"
+abbrlink: f888285
 ---
 
 # ES6 await 语法详解

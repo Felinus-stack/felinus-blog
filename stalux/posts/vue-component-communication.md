@@ -6,9 +6,9 @@ tags:
 categories:
     - 前端
     - Vue2
-date: "2026-04-11 14:50:34 "
-updated: "2026-04-24 00:00:00"
-abbrlink: f8882810
+date: "2025-11-30 14:50:34"
+updated: "2025-11-30 14:50:34"
+abbrlink: f8882826
 ---
 
 # Vue组件通信核心详解（Props+自定义事件）

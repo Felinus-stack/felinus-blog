@@ -8,9 +8,9 @@ tags:
 categories:
     - AI
     - LangChain
-date: "2026-06-12 12:00:00"
-updated: "2026-06-12 12:00:00"
-abbrlink: f8882816
+date: "2026-06-05 12:00:00"
+updated: "2026-06-05 12:00:00"
+abbrlink: f888282
 ---
 
 > 本文整理了 LangChain.js 的核心概念与实践，涵盖模型创建、提示词模板、链式调用、任务拆解、Plan & Execute 模式、ReAct Agent 等内容。

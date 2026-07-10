@@ -1,7 +1,6 @@
 ---
 import PostLeft from "@components/stalux/posts/postLeft.astro";
 import PostContent from "@components/stalux/posts/postContent.astro";
-import PostRight from "@components/stalux/posts/postRight.astro";
 import PostNavigation from "@components/stalux/posts/postNavigation.astro";
 import PostCC from "@components/stalux/posts/postCC.astro";
 import WalineComment from "@components/stalux/posts/WalineComment.astro";
@@ -47,7 +46,14 @@ const walineConfig = stalux?.comment?.waline;
 <div class={layoutStyle.postLayout}>
     <div class={layoutStyle.container}>
         <!-- Left Sidebar -->
-        <PostLeft author={author} authorAvatar={props.authorAvatar} />
+        <PostLeft
+            headings={headings}
+            date={props.date}
+            updated={props.updated}
+            readingTime={props.readingTime}
+            wordCount={props.wordCount}
+            categories={categories}
+        />
 
         <!-- Main Content -->
         <PostContent
@@ -57,6 +63,8 @@ const walineConfig = stalux?.comment?.waline;
             readingTime={props.readingTime}
             wordCount={props.wordCount}
             hasImage={props.hasImage}
+            categories={categories}
+            tags={tags}
         >
             <slot />
             <PostCC
@@ -93,9 +101,6 @@ const walineConfig = stalux?.comment?.waline;
                 )
             }
         </PostContent>
-
-        <!-- Right Sidebar -->
-        <PostRight headings={headings} tags={tags} categories={categories} />
     </div>
 </div>
 
