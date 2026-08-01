@@ -10,7 +10,7 @@ categories:
     - AI开发
 date: "2026-07-10 14:00:00"
 updated: "2026-07-10 14:00:00"
-abbrlink: f444294701
+abbrlink: f444294702
 ---
 # AI 应用开发核心技术详解
 

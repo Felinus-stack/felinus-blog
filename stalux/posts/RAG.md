@@ -12,7 +12,7 @@ categories:
     - 大模型
 date: "2026-07-31 15:30:07"
 updated: "2026-07-31 15:30:07"
-abbrlink: f8882828
+abbrlink: f8882829
 ---
 
 ## RAG 是什么
