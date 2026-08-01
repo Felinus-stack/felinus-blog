@@ -12,22 +12,18 @@ interface Props {
 const { title, author, url, cc = "CC-BY-NC-SA-4.0" } = Astro.props;
 
 // CC 许可证信息映射
-const ccLicenses: Record<string, { name: string; link: string }> = {
+const ccLicenses: Record<string, { name: string }> = {
     "CC-BY-NC-SA-4.0": {
         name: "知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议",
-        link: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     },
     "CC-BY-4.0": {
         name: "知识共享署名 4.0 国际许可协议",
-        link: "https://creativecommons.org/licenses/by/4.0/",
     },
     "CC-BY-SA-4.0": {
         name: "知识共享署名-相同方式共享 4.0 国际许可协议",
-        link: "https://creativecommons.org/licenses/by-sa/4.0/",
     },
     "CC-BY-NC-4.0": {
         name: "知识共享署名-非商业性使用 4.0 国际许可协议",
-        link: "https://creativecommons.org/licenses/by-nc/4.0/",
     },
 };
 
@@ -49,13 +45,7 @@ const licenseInfo = ccLicenses[cc] || ccLicenses["CC-BY-NC-SA-4.0"];
             )
         }
         <p class={style.ccLicense}>
-            本文采用 <a
-                href={licenseInfo.link}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                {licenseInfo.name}
-            </a> 进行许可。
+            本文采用 {licenseInfo.name} 进行许可。
         </p>
     </div>
 

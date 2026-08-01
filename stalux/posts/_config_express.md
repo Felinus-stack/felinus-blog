@@ -45,7 +45,7 @@ npm init -y
 
 # 安装Express
 
-npm install express
+install express
 
 ```
 
