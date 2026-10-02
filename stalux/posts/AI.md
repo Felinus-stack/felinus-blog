@@ -1,16 +1,14 @@
 ---
-title: 《LangChain.js 学习指南：从基础到 Agent 实战》
+title: 《LangChain.js 知识点》
 tags:
     - AI
-    - LangChain
+    - JEV
     - 大模型
-    - Agent
 categories:
     - AI
-    - LangChain
-date: "2026-06-05 12:00:00"
-updated: "2026-06-05 12:00:00"
-abbrlink: f888282
+date: "2026-828 09:00:00"
+updated: "2026-10-02 09:00:00"
+abbrlink: f8882830
 ---
 
 > 本文整理了 LangChain.js 的核心概念与实践，涵盖模型创建、提示词模板、链式调用、任务拆解、Plan & Execute 模式、ReAct Agent 等内容。
